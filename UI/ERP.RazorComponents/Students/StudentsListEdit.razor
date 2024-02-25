@@ -1,0 +1,610 @@
+﻿@using ERP.Application.StudentApp.Students.Interfaces
+@using ERP.Domain.Core.Entity;
+
+@inject NavigationManager NavigationManager
+@inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
+@inject IDialogService DialogService
+
+<div style="text-align: center; margin-bottom: 0;">
+    <h2><u>STUDENT'S LIST</u></h2>
+</div>
+
+<MudTable Items="@_students" HeaderClass="custom-header-class" RowClass="custom-row-class">
+    <HeaderContent>
+        <MudTh>Reg Number</MudTh>
+        <MudTh>Full Name</MudTh>
+        <MudTh>E-mail</MudTh>
+        <MudTh>Contact NB</MudTh>
+        <MudTh>NationalID</MudTh>
+        <MudTh>District</MudTh>
+        <MudTh>Action</MudTh>
+
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="regno">@context.RegistrationNum</MudTd>
+        <MudTd DataLabel="fullname">@context.FirstName @context.LastName</MudTd>
+        
+        <MudTd DataLabel="email">@context.Email</MudTd>
+        <MudTd DataLabel="phonenb">@context.PhoneNumber</MudTd>
+        <MudTd DataLabel="nationalid">@context.NationalID</MudTd>
+        <MudTd DataLabel="district">@context.District</MudTd>
+
+
+        <MudTd DataLabel="">
+            <MudFab OnClick="@(()=> EditStudent(@context))" Color="Color.Primary"
+                StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+            <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+            <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div style="text-align: center; margin-top: 20px; background-color: aliceblue;">
+    <MudButton Color="Color.Primary" OnClick="@NavigateToStudentAddPage">Add Student</MudButton>
+
+</div>
+
+
+<style>
+    .custom-header-class {
+        background-color: #d98062;
+        color: #f6efef;
+        font-size: large;
+        font-weight: 600;
+        font-family: sans-serif;
+
+    }
+
+    .custom-row-class {
+        background-color: #54a3c2;
+        color: #000000;
+
+    }
+</style>
+
+
+
+@code {
+
+    private void NavigateToStudentAddPage()
+
+
+
+    {
+
+
+
+        NavigationManager.NavigateTo("/studentaddpage");
+
+
+
+    }
+
+
+
+
+
+
+
+    private List<Student> _students = new List<Student>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [Parameter]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public string SearchTerm { get; set; } = string.Empty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        _students = (await ViewStudentsByNameUseCase.ExecuteAsync("")).ToList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    protected override async Task OnParametersSetAsync()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        _students = (await ViewStudentsByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async Task EditStudent(Student student)
+
+
+
+
+
+
+
+    {
+
+
+
+
+
+
+
+        var parameters = new DialogParameters<EditStudentDialog> { { x => x.student, student } };
+
+
+
+
+
+
+
+        var dialog = await DialogService.ShowAsync<EditStudentDialog>("Save", parameters);
+
+
+
+
+
+
+
+
+
+
+
+        var result = await dialog.Result;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (!result.Canceled)
+
+
+
+
+
+
+
+        {
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+}
