@@ -15,6 +15,7 @@ namespace ERP.Repository.PgSql
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new StudentConfigurations());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
             
             modelBuilder.Entity<ModuleOfferingTeacher>()
             .HasKey(mt => new { mt.ModuleOfferingId, mt.TeacherId });
@@ -58,6 +59,20 @@ namespace ERP.Repository.PgSql
                 .WithMany(ms => ms.SecondExaminersModules)
                 .HasForeignKey(ms => ms.TeacherId);
 
+            // module registration primary key
+
+            modelBuilder.Entity<NewModule>()
+                .HasKey(mf => new { mf.ModuleId });
+
+            // module registration foreign key
+
+            modelBuilder.Entity<NewModule>().
+                HasOne(ms=>ms.Teacher)
+                .WithMany(ms=>ms.modules)
+                .HasForeignKey(ms=>ms.teacherId);
+				
+
+
         }
 
         public DbSet<Student> Students { get; set; }
@@ -66,6 +81,8 @@ namespace ERP.Repository.PgSql
         public DbSet<ModuleOfferingTeacher> ModuleTeachers { get; set;}
         public DbSet<ModuleOfferingFirstExaminer> ModuleFirstExaminers { get; set; }
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }
+
+        public DbSet<NewModule> Newmodules { get; set; }
 
     }
 }
