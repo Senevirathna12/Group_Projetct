@@ -3,6 +3,7 @@ using System;
 using ERP.Repository.PgSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ERP.Repository.PgSql.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    partial class PgSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306093921_NEWWW")]
+    partial class NEWWW
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,34 +270,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.ToTable("ModuleRegistration");
                 });
 
-            modelBuilder.Entity("ERP.Domain.Core.Entity.NewModule", b =>
-                {
-                    b.Property<int>("ModuleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ModuleId"));
-
-                    b.Property<int>("Credit")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ModuleName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("semester")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("teacherId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ModuleId");
-
-                    b.HasIndex("teacherId");
-
-                    b.ToTable("Newmodules");
-                });
-
             modelBuilder.Entity("ERP.Domain.Core.Entity.Semester", b =>
                 {
                     b.Property<int>("SemesterId")
@@ -406,13 +381,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Ignacio.Bode29@hotmail.com",
-                            FirstName = "Ignacio",
-                            LastName = "Bode",
+                            Email = "Felicity44@gmail.com",
+                            FirstName = "Felicity",
+                            LastName = "Pfeffer",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/3321"
+                            RegistrationNum = "EG/2022/8570"
                         },
                         new
                         {
@@ -422,13 +397,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Archibald.DuBuque86@hotmail.com",
-                            FirstName = "Archibald",
-                            LastName = "DuBuque",
+                            Email = "Nayeli_Reynolds@gmail.com",
+                            FirstName = "Nayeli",
+                            LastName = "Reynolds",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/1526"
+                            RegistrationNum = "EG/2022/8815"
                         },
                         new
                         {
@@ -438,13 +413,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Ashtyn_Legros90@hotmail.com",
-                            FirstName = "Ashtyn",
-                            LastName = "Legros",
+                            Email = "Meredith.Graham@yahoo.com",
+                            FirstName = "Meredith",
+                            LastName = "Graham",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/5967"
+                            RegistrationNum = "EG/2022/6669"
                         },
                         new
                         {
@@ -454,13 +429,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Chester_Schamberger25@yahoo.com",
-                            FirstName = "Chester",
-                            LastName = "Schamberger",
+                            Email = "Norberto.Bosco45@hotmail.com",
+                            FirstName = "Norberto",
+                            LastName = "Bosco",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/5852"
+                            RegistrationNum = "EG/2022/3186"
                         },
                         new
                         {
@@ -470,13 +445,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Lempi_Runolfsdottir88@gmail.com",
-                            FirstName = "Lempi",
-                            LastName = "Runolfsdottir",
+                            Email = "Arthur22@hotmail.com",
+                            FirstName = "Arthur",
+                            LastName = "Ortiz",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/6096"
+                            RegistrationNum = "EG/2021/1602"
                         },
                         new
                         {
@@ -486,13 +461,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Elisha.Weissnat@yahoo.com",
-                            FirstName = "Elisha",
-                            LastName = "Weissnat",
+                            Email = "Rocky_Block@gmail.com",
+                            FirstName = "Rocky",
+                            LastName = "Block",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/1093"
+                            RegistrationNum = "EG/2021/8974"
                         },
                         new
                         {
@@ -502,13 +477,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Jerrell33@gmail.com",
-                            FirstName = "Jerrell",
-                            LastName = "Heller",
+                            Email = "Roy5@yahoo.com",
+                            FirstName = "Roy",
+                            LastName = "Prosacco",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/4568"
+                            RegistrationNum = "EG/2023/6824"
                         },
                         new
                         {
@@ -518,13 +493,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Kimberly_Greenholt61@gmail.com",
-                            FirstName = "Kimberly",
-                            LastName = "Greenholt",
+                            Email = "Cheyenne.OReilly@hotmail.com",
+                            FirstName = "Cheyenne",
+                            LastName = "O'Reilly",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/4472"
+                            RegistrationNum = "EG/2021/4386"
                         },
                         new
                         {
@@ -534,13 +509,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Mathew_Kuphal@gmail.com",
-                            FirstName = "Mathew",
-                            LastName = "Kuphal",
+                            Email = "Tierra24@gmail.com",
+                            FirstName = "Tierra",
+                            LastName = "Bayer",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2021/4448"
+                            RegistrationNum = "EG/2020/4394"
                         },
                         new
                         {
@@ -550,13 +525,13 @@ namespace ERP.Repository.PgSql.Migrations
                             City = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Giovanna63@hotmail.com",
-                            FirstName = "Giovanna",
-                            LastName = "Doyle",
+                            Email = "Timmy_Kutch@yahoo.com",
+                            FirstName = "Timmy",
+                            LastName = "Kutch",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2021/6188"
+                            RegistrationNum = "EG/2023/9386"
                         });
                 });
 
@@ -640,53 +615,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasKey("TeacherId");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            TeacherId = 1001,
-                            Address1 = "",
-                            Address2 = "",
-                            City = "",
-                            District = "",
-                            DoB = new DateOnly(1, 1, 1),
-                            Email = "Murphy.Zulauf17@yahoo.com",
-                            FirstName = "Murphy",
-                            LastName = "Zulauf",
-                            NationalID = "",
-                            Phone = "",
-                            PhoneNumber = ""
-                        },
-                        new
-                        {
-                            TeacherId = 1002,
-                            Address1 = "",
-                            Address2 = "",
-                            City = "",
-                            District = "",
-                            DoB = new DateOnly(1, 1, 1),
-                            Email = "Abby30@gmail.com",
-                            FirstName = "Abby",
-                            LastName = "Kihn",
-                            NationalID = "",
-                            Phone = "",
-                            PhoneNumber = ""
-                        },
-                        new
-                        {
-                            TeacherId = 1003,
-                            Address1 = "",
-                            Address2 = "",
-                            City = "",
-                            District = "",
-                            DoB = new DateOnly(1, 1, 1),
-                            Email = "Gaston67@gmail.com",
-                            FirstName = "Gaston",
-                            LastName = "Herman",
-                            NationalID = "",
-                            Phone = "",
-                            PhoneNumber = ""
-                        });
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Curriculum", b =>
@@ -840,17 +768,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("ERP.Domain.Core.Entity.NewModule", b =>
-                {
-                    b.HasOne("ERP.Domain.Core.Entity.Teacher", "Teacher")
-                        .WithMany("modules")
-                        .HasForeignKey("teacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("ERP.Domain.Core.Entity.Semester", b =>
                 {
                     b.HasOne("ERP.Domain.Core.Entity.Batch", "Batch")
@@ -945,8 +862,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.Navigation("SecondExaminersModules");
 
                     b.Navigation("TeachingModules");
-
-                    b.Navigation("modules");
                 });
 #pragma warning restore 612, 618
         }

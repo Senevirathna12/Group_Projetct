@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.Domain.Core.Entity
 {
     public class Teacher 
     {
+        [Key] 
         public int TeacherId { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
@@ -16,6 +18,8 @@ namespace ERP.Domain.Core.Entity
         public DateOnly DoB { get; set; }
         public string NationalID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
+
+        public ICollection<NewModule> modules { get; set; }
 
         [InverseProperty("Coordinator")]
         public ICollection<ModuleOffering> CordinatingModules {  get; set; }

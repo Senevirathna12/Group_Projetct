@@ -1,3 +1,6 @@
+using ERP.Application.StaffApp.Interfaces;
+using ERP.Application.StaffApp.ReporsitoryInterface;
+using ERP.Application.StaffApp.UseCases;
 using ERP.Application.StudentApp.Interfaces;
 using ERP.Application.StudentApp.Students;
 using ERP.Application.StudentApp.Students.Interfaces;
@@ -30,10 +33,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMudServices();
 
 builder.Services.AddScoped<IStudentRepository, StudentRepositoryPgSql>();
+builder.Services.AddScoped<IModuleRepository,ModuleReporsitoryPgSQL>();
 builder.Services.AddScoped<IViewStudentsByNameUseCase, ViewStudentsByNameUseCase>();
 builder.Services.AddScoped<IAddStudentUseCase, AddStudentUseCase>();
 builder.Services.AddScoped<IViewStudentById, ViewStudentById>();
 builder.Services.AddScoped<IEditStudentUseCase, EditStudentUseCase>();
+builder.Services.AddScoped<IAddModuleUseCase, AddModuleUseCase>();
 
 
 var app = builder.Build();

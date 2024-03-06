@@ -1,6 +1,4 @@
-@page "/studentaddpage"
-
-
+﻿@page "/addModule"
 @using ERP.Application.StaffApp.Interfaces
 @using ERP.Domain.Core.Entity
 @using FluentValidation
@@ -19,12 +17,13 @@
             <MudTextField @bind-Value="model.teacherId"
                           Immediate="true"
                           Label="teacher" />
-
+      
             <MudTextField @bind-Value="model.Credit"
+                          
                           Immediate="true"
                           Label="Credit" />
 
-
+            
 
 
         </MudCardContent>
@@ -33,11 +32,11 @@
         <MudButton Variant="Variant.Filled"
                    Color="Color.Primary"
                    Class="ml-auto"
-                   OnClick="@(async () => await Submit())">ADD</MudButton>
+                   OnClick="@(async () => await Submit())">Update</MudButton>
     </MudCardActions>
 </MudCard>
 @code {
-    public NewModule model = new NewModule();
+    private NewModule model;
 
     MudForm form;
     private async Task Submit()
@@ -50,7 +49,7 @@
 
 
 
-
+    
 }
 
 @* @using ERP.Application.StudentApp.Students.Interfaces
@@ -186,15 +185,3 @@
     }
 }
  *@
-@* @using ERP.RazorComponents.Students
-
-<style>
-    h2 {
-        text-align: center;
-        font-weight: bold;
-        text-decoration: underline;
-    }
-</style>
-
-<h2>ADD NEW STUDENT</h2>
-<StudentAdd/> *@

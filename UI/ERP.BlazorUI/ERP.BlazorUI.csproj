@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\ERP.Application.StaffApp\ERP.Application.StaffApp.csproj" />
     <ProjectReference Include="..\..\Application\ERP.Application.StudentApp\ERP.Application.StudentApp.csproj" />
     <ProjectReference Include="..\..\Domain\ERP.Domain.Core\ERP.Domain.Core.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ERP.Repository.InMemory\ERP.Repository.InMemory.csproj" />

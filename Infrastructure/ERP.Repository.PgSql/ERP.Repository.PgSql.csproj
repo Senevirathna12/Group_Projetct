@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\ERP.Application.StaffApp\ERP.Application.StaffApp.csproj" />
     <ProjectReference Include="..\..\Application\ERP.Application.StudentApp\ERP.Application.StudentApp.csproj" />
     <ProjectReference Include="..\..\Domain\ERP.Domain.Core\ERP.Domain.Core.csproj" />
   </ItemGroup>

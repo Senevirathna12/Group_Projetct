@@ -13,7 +13,7 @@
         public string Address2 { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
-        // public DateOnly DoB { get; set; }
+        public DateOnly DoB { get; set; }
         public string NationalID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
 
