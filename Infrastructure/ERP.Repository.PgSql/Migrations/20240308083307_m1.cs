@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ERP.Repository.PgSql.Migrations
 {
     /// <inheritdoc />
-    public partial class bogus : Migration
+    public partial class m1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,6 +49,10 @@ namespace ERP.Repository.PgSql.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Modules_ModeratorTeacherId",
                 table: "Modules");
+
+            migrationBuilder.DropColumn(
+                name: "DoB",
+                table: "Students");
 
             migrationBuilder.DropColumn(
                 name: "CoordinatorTeacherId",
@@ -119,6 +125,28 @@ namespace ERP.Repository.PgSql.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Department", x => x.DepartmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Newmodules",
+                columns: table => new
+                {
+                    ModuleId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ModuleName = table.Column<string>(type: "text", nullable: false),
+                    semester = table.Column<int>(type: "integer", nullable: false),
+                    Credit = table.Column<int>(type: "integer", nullable: false),
+                    teacherId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Newmodules", x => x.ModuleId);
+                    table.ForeignKey(
+                        name: "FK_Newmodules_Teachers_teacherId",
+                        column: x => x.teacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "TeacherId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -320,70 +348,80 @@ namespace ERP.Repository.PgSql.Migrations
                 keyColumn: "StudentId",
                 keyValue: 1001,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Gail_Auer7@hotmail.com", "Gail", "Auer", "", "EG/2021/6447" });
+                values: new object[] { "", null, "Abner87@hotmail.com", "Abner", "Quigley", "", "EG/2023/3804" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1002,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Jefferey.Kshlerin47@gmail.com", "Jefferey", "Kshlerin", "", "EG/2023/6712" });
+                values: new object[] { "", null, "Dawson.Hansen73@gmail.com", "Dawson", "Hansen", "", "EG/2021/9919" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1003,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Stevie35@hotmail.com", "Stevie", "Bosco", "", "EG/2022/7796" });
+                values: new object[] { "", null, "Norberto.Monahan46@hotmail.com", "Norberto", "Monahan", "", "EG/2023/4050" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1004,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Christy_Moore76@gmail.com", "Christy", "Moore", "", "EG/2022/5728" });
+                values: new object[] { "", null, "Hayley.Heaney47@hotmail.com", "Hayley", "Heaney", "", "EG/2021/2841" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1005,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Glenda_Marks@yahoo.com", "Glenda", "Marks", "", "EG/2023/7424" });
+                values: new object[] { "", null, "Raul.Schuppe@gmail.com", "Raul", "Schuppe", "", "EG/2022/6154" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1006,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Mellie.Deckow83@gmail.com", "Mellie", "Deckow", "", "EG/2023/9723" });
+                values: new object[] { "", null, "Green77@yahoo.com", "Green", "Nolan", "", "EG/2021/4260" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1007,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Noah_Mosciski74@yahoo.com", "Noah", "Mosciski", "", "EG/2020/7537" });
+                values: new object[] { "", null, "Deontae.Balistreri3@hotmail.com", "Deontae", "Balistreri", "", "EG/2023/4955" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1008,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Darrel29@yahoo.com", "Darrel", "Goyette", "", "EG/2020/1430" });
+                values: new object[] { "", null, "Caden76@gmail.com", "Caden", "Wehner", "", "EG/2023/8107" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1009,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Cary64@hotmail.com", "Cary", "Senger", "", "EG/2023/2956" });
+                values: new object[] { "", null, "Jadon71@gmail.com", "Jadon", "Ruecker", "", "EG/2023/4667" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1010,
                 columns: new[] { "Address1", "DegreeId", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "", null, "Coby66@hotmail.com", "Coby", "O'Reilly", "", "EG/2023/3277" });
+                values: new object[] { "", null, "Chase14@gmail.com", "Chase", "Hills", "", "EG/2023/2218" });
+
+            migrationBuilder.InsertData(
+                table: "Teachers",
+                columns: new[] { "TeacherId", "Address1", "Address2", "City", "District", "DoB", "Email", "FirstName", "LastName", "NationalID", "Phone", "PhoneNumber" },
+                values: new object[,]
+                {
+                    { 1001, "", "", "", "", new DateOnly(1, 1, 1), "Brionna_Kub@yahoo.com", "Brionna", "Kub", "", "", "" },
+                    { 1002, "", "", "", "", new DateOnly(1, 1, 1), "Leda_Jakubowski16@yahoo.com", "Leda", "Jakubowski", "", "", "" },
+                    { 1003, "", "", "", "", new DateOnly(1, 1, 1), "Deonte_Dietrich30@hotmail.com", "Deonte", "Dietrich", "", "", "" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_DegreeId",
@@ -444,6 +482,11 @@ namespace ERP.Repository.PgSql.Migrations
                 name: "IX_ModuleRegistration_StudentId",
                 table: "ModuleRegistration",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Newmodules_teacherId",
+                table: "Newmodules",
+                column: "teacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Semester_BatchId",
@@ -539,6 +582,9 @@ namespace ERP.Repository.PgSql.Migrations
                 name: "ModuleRegistration");
 
             migrationBuilder.DropTable(
+                name: "Newmodules");
+
+            migrationBuilder.DropTable(
                 name: "StudentResult");
 
             migrationBuilder.DropTable(
@@ -566,6 +612,21 @@ namespace ERP.Repository.PgSql.Migrations
             migrationBuilder.DropIndex(
                 name: "IX_Modules_CurriculumId",
                 table: "Modules");
+
+            migrationBuilder.DeleteData(
+                table: "Teachers",
+                keyColumn: "TeacherId",
+                keyValue: 1001);
+
+            migrationBuilder.DeleteData(
+                table: "Teachers",
+                keyColumn: "TeacherId",
+                keyValue: 1002);
+
+            migrationBuilder.DeleteData(
+                table: "Teachers",
+                keyColumn: "TeacherId",
+                keyValue: 1003);
 
             migrationBuilder.DropColumn(
                 name: "DegreeId",
@@ -599,6 +660,13 @@ namespace ERP.Repository.PgSql.Migrations
                 table: "ModuleFirstExaminers",
                 newName: "ModuleId");
 
+            migrationBuilder.AddColumn<DateOnly>(
+                name: "DoB",
+                table: "Students",
+                type: "date",
+                nullable: false,
+                defaultValue: new DateOnly(1, 1, 1));
+
             migrationBuilder.AddColumn<int>(
                 name: "CoordinatorTeacherId",
                 table: "Modules",
@@ -617,71 +685,71 @@ namespace ERP.Repository.PgSql.Migrations
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1001,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "070 Lizeth Lights", "", "Carrie", "Cronin", "(811)865-5166", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "070 Lizeth Lights", new DateOnly(1, 1, 1), "", "Carrie", "Cronin", "(811)865-5166", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1002,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "881 Dietrich Mountain", "", "Theron", "Jakubowski", "1-979-355-2946 x0080", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "881 Dietrich Mountain", new DateOnly(1, 1, 1), "", "Theron", "Jakubowski", "1-979-355-2946 x0080", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1003,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "334 Dibbert Summit", "", "Elza", "Turcotte", "1-359-077-8858", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "334 Dibbert Summit", new DateOnly(1, 1, 1), "", "Elza", "Turcotte", "1-359-077-8858", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1004,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "5088 D'angelo Forge", "", "Joesph", "Murray", "498-686-7327", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "5088 D'angelo Forge", new DateOnly(1, 1, 1), "", "Joesph", "Murray", "498-686-7327", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1005,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "5271 Koch Extension", "", "Jayden", "Jones", "(772)930-2172 x74506", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "5271 Koch Extension", new DateOnly(1, 1, 1), "", "Jayden", "Jones", "(772)930-2172 x74506", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1006,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "3320 Lang Port", "", "Cleo", "Jaskolski", "699.409.0142 x07062", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "3320 Lang Port", new DateOnly(1, 1, 1), "", "Cleo", "Jaskolski", "699.409.0142 x07062", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1007,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "9452 Lori Corners", "", "Ofelia", "Hickle", "1-831-253-5603 x337", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "9452 Lori Corners", new DateOnly(1, 1, 1), "", "Ofelia", "Hickle", "1-831-253-5603 x337", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1008,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "2389 Kassandra Court", "", "Gonzalo", "Daugherty", "453.036.6839 x84043", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "2389 Kassandra Court", new DateOnly(1, 1, 1), "", "Gonzalo", "Daugherty", "453.036.6839 x84043", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1009,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "02818 DuBuque Square", "", "Waldo", "Johns", "673.082.6720", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "02818 DuBuque Square", new DateOnly(1, 1, 1), "", "Waldo", "Johns", "673.082.6720", "" });
 
             migrationBuilder.UpdateData(
                 table: "Students",
                 keyColumn: "StudentId",
                 keyValue: 1010,
-                columns: new[] { "Address1", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
-                values: new object[] { "888 Feil Court", "", "Estel", "Ryan", "220.092.3169 x65849", "" });
+                columns: new[] { "Address1", "DoB", "Email", "FirstName", "LastName", "Phone", "RegistrationNum" },
+                values: new object[] { "888 Feil Court", new DateOnly(1, 1, 1), "", "Estel", "Ryan", "220.092.3169 x65849", "" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Modules_CoordinatorTeacherId",

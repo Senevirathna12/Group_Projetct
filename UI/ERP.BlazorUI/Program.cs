@@ -34,11 +34,13 @@ builder.Services.AddMudServices();
 
 builder.Services.AddScoped<IStudentRepository, StudentRepositoryPgSql>();
 builder.Services.AddScoped<IModuleRepository,ModuleReporsitoryPgSQL>();
+builder.Services.AddScoped<ITeacherRepository, TeacherReporsitoryPgSQL>();
 builder.Services.AddScoped<IViewStudentsByNameUseCase, ViewStudentsByNameUseCase>();
 builder.Services.AddScoped<IAddStudentUseCase, AddStudentUseCase>();
 builder.Services.AddScoped<IViewStudentById, ViewStudentById>();
 builder.Services.AddScoped<IEditStudentUseCase, EditStudentUseCase>();
 builder.Services.AddScoped<IAddModuleUseCase, AddModuleUseCase>();
+builder.Services.AddScoped<IAddTeacherUseCase, AddTeacherUseCase>();
 
 
 var app = builder.Build();

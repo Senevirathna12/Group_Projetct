@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace ERP.Application.StaffApp.DependancyInjection
 {
-    public static class ModuleDependancy
-	{
-		public static IServiceCollection AddModuleServices(
-			this IServiceCollection services)
-		{
-			services.AddScoped<IAddModuleUseCase,AddModuleUseCase>();
-			
-			return services;
-		}
-	}
+    public static class TeacherDependancy
+    {
+        public static IServiceCollection AddTeacherServices(
+            this IServiceCollection services)
+        {
+            services.AddScoped<IAddTeacherUseCase, AddTeacherUseCase>();
+
+            return services;
+        }
+    }
 }
