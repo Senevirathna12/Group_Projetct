@@ -69,13 +69,26 @@
 
         <MudNavGroup Class="text" Title="Non-Academic Staff" Icon="@Icons.Material.Filled.Person"
             IconColor="Color.Inherit" Expanded="false">
-           
-            <MudNavLink Href="/studenteditlist" Icon="@Icons.Material.Filled.People" IconColor="Color.Inherit">
-                Student Registraton</MudNavLink>
+                       
+            <MudNavGroup Class="text" Title="Student Management" Icon="@Icons.Material.Filled.Person"
+                         IconColor="Color.Inherit" Expanded="false">
+                <MudNavLink Href="/studenteditlist" Icon="@Icons.Material.Filled.People" IconColor="Color.Inherit">
+                    Student Registraton
+                </MudNavLink>
+             
+            </MudNavGroup>
 
-            <MudNavLink Href="/addTeacher" Icon="@Icons.Material.Filled.School" IconColor="Color.Inherit">
-                Teacher Registration
-            </MudNavLink>
+            <MudNavGroup Class="text" Title="Teachers Management" Icon="@Icons.Material.Filled.Person"
+                         IconColor="Color.Inherit" Expanded="false">
+                <MudNavLink Href="/addTeacher" Icon="@Icons.Material.Filled.People" IconColor="Color.Inherit">
+                    Teacher Registration
+                </MudNavLink>
+
+                <MudNavLink Href="/teachersList" Icon="@Icons.Material.Filled.School" IconColor="Color.Inherit">
+                    Teachers List
+                </MudNavLink>
+
+            </MudNavGroup>
 
             <MudNavGroup Class="text" Title="Module Management" Icon="@Icons.Material.Filled.Person"
                 IconColor="Color.Inherit" Expanded="false">

@@ -10,5 +10,6 @@ namespace ERP.Application.StaffApp.ReporsitoryInterface
     public interface ITeacherRepository
     {
         Task AddTeacherAsync(Teacher teacher);
+        Task<IEnumerable<Teacher>> GetAllTeachersAsync(string name);
     }
 }
