@@ -66,11 +66,13 @@ namespace ERP.Repository.PgSql
 
             // module registration foreign key
 
-            modelBuilder.Entity<NewModule>().
-                HasOne(ms=>ms.Teacher)
-                .WithMany(ms=>ms.modules)
-                .HasForeignKey(ms=>ms.teacherId);
-				
+            modelBuilder.Entity<NewModule>()
+                .HasOne(ms => ms.Teacher)
+                .WithMany(ms => ms.modules)
+                .HasForeignKey(ms => ms.teacherId);
+
+
+
 
 
         }
@@ -83,6 +85,7 @@ namespace ERP.Repository.PgSql
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }
 
         public DbSet<NewModule> Newmodules { get; set; }
+        
 
     }
 }

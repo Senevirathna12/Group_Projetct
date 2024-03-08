@@ -16,7 +16,7 @@
                           Label="semester" />
             <MudTextField @bind-Value="model.teacherId"
                           Immediate="true"
-                          Label="teacher" />
+                          Label="teacherID" />
       
             <MudTextField @bind-Value="model.Credit"
                           
@@ -36,15 +36,21 @@
     </MudCardActions>
 </MudCard>
 @code {
-    private NewModule model;
+    private NewModule model = new NewModule();
+
+    //private Student model = new Student();
+
 
     MudForm form;
+
+   
+
     private async Task Submit()
     {
 
 
-        await AddModuleUseCase.ExecuteAsync(model);
-
+       await AddModuleUseCase.ExecuteAsync(model);
+        
     }
 
 
@@ -58,7 +64,7 @@
 @inject IEditStudentUseCase EditStudentUseCase
 @inject IViewStudentById ViewStudentById
 
-<h3>AddStudent</h3>
+
 
 
 <MudCard>

@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace ERP.Application.StaffApp.UseCases
 {
-	public class AddModuleUseCase : IAddModuleUseCase
-	{
-		private readonly IModuleRepository _moduleRepository;
+    public class AddModuleUseCase : IAddModuleUseCase
+    {
+        private readonly IModuleRepository _moduleRepository;
 
         public AddModuleUseCase(IModuleRepository moduleRepository)
         {
-			_moduleRepository = moduleRepository;
-            
+            _moduleRepository = moduleRepository;
+
         }
         public async Task ExecuteAsync(NewModule newModule)
-		{
-			await _moduleRepository.AddModuleAsync(newModule);
-		}
-	}
+        {
+            await _moduleRepository.AddModuleAsync(newModule);
+        }
+    }
 }

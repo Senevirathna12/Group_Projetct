@@ -17,7 +17,7 @@ namespace ERP.Repository.PgSql.Configurations
 
 			builder.HasData(
 
-			   Enumerable.Range(1,3).Select(
+			   Enumerable.Range(1,10).Select(
 				   index => new Faker<Teacher>()
 						 .RuleFor(s => s.TeacherId, index + 1000)
 						 .RuleFor(s => s.FirstName, f => f.Name.FirstName())

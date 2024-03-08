@@ -1,0 +1,96 @@
+﻿@page "/addTeacher"
+@using ERP.Application.StaffApp.Interfaces
+@using ERP.Domain.Core.Entity
+@using FluentValidation
+@inject IAddTeacherUseCase AddTeacherUseCase
+
+<h2><c>ADD Teacher</c></h2>
+
+<MudCard>
+    <MudForm Model="@model"
+             @ref="@form">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.TeacherId"
+                          Immediate="true"
+                          Label="Teacher ID" />
+            <MudTextField @bind-Value="model.FirstName"
+                          Immediate="true"
+                          Label="First Name" />
+
+            <MudTextField @bind-Value="model.LastName"
+                          Immediate="true"
+                          Label="Last Name" />
+            <MudTextField @bind-Value="model.Email"
+                          Immediate="true"
+                          Label="Email" />
+
+            <MudTextField @bind-Value="model.Phone"
+                          Immediate="true"
+                          Label="Phone" />
+
+            <MudTextField @bind-Value="model.Address1"
+                          Immediate="true"
+                          Label="Assress01" />
+
+            <MudTextField @bind-Value="model.Address2"
+                          Immediate="true"
+                          Label="Address02" />
+
+            <MudTextField @bind-Value="model.City"
+                          Immediate="true"
+                          Label="City" />
+
+            <MudTextField @bind-Value="model.District"
+                          Immediate="true"
+                          Label="District" />
+
+            <MudTextField @bind-Value="model.PhoneNumber"
+                          Immediate="true"
+                          Label="Mobile NB" />
+
+            <MudTextField @bind-Value="model.NationalID"
+                          Immediate="true"
+                          Label="National ID" />
+
+            <MudTextField @bind-Value="model.modules"
+                          Immediate="true"
+                          Label="Modules" />
+
+            
+
+           
+
+
+
+
+
+
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="ml-auto"
+                   OnClick="@(async () => await Submit())">Update</MudButton>
+    </MudCardActions>
+</MudCard>
+@code {
+    private Teacher model = new Teacher();
+
+
+    MudForm form;
+
+
+
+    private async Task Submit()
+    {
+
+
+        await AddTeacherUseCase.ExecuteAsync(model);
+
+    }
+
+
+
+
+}
