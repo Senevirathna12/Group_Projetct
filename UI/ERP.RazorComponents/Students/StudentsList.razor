@@ -9,15 +9,22 @@
         <MudTh>Number</MudTh>
         <MudTh>Name</MudTh>
         <MudTh>Email</MudTh>
-        <MudTh>Image</MudTh>
+        <MudTh>RegNB</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Mobile NB</MudTh>
+        @* <MudTh>Image</MudTh> *@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="regno">@context.RegistrationNum</MudTd>
         <MudTd DataLabel="fullname">@context.FirstName @context.LastName </MudTd>
         <MudTd DataLabel="email">@context.Email</MudTd>
-        <MudTd DataLabel="image">
+        <MudTd DataLabel="regnb">@context.RegistrationNum</MudTd>
+        <MudTd DataLabel="id">@context.NationalID</MudTd>
+        <MudTd DataLabel="mobile">@context.PhoneNumber</MudTd>
+
+        @* <MudTd DataLabel="image">
             <MudImage Src="images/woman.png" Width="40" />
-        </MudTd>
+        </MudTd> *@
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

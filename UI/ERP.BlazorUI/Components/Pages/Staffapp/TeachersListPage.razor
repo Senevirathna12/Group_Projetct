@@ -1,0 +1,72 @@
+﻿@page "/teachersList"
+
+@using ERP.Application.StaffApp.Interfaces
+@using ERP.Domain.Core.Entity
+@using FluentValidation
+
+@inject IViewTeacherByNameUseCase ViewTeacherByNameUseCase
+
+
+<h3>Teachers List</h3>
+
+<MudTextField @bind-Value="SearchTerm" Label="Search by Name" Placeholder="Enter name" />
+
+<MudTable Items="@_teachers" HeaderClass="custom-header-class" RowClass="custom-row-class">
+    <HeaderContent>
+        <MudTh>ID</MudTh>
+        <MudTh>Full Name</MudTh>
+        <MudTh>Phone</MudTh>
+        <MudTh>E-mail</MudTh>
+        <MudTh>Address</MudTh>
+        <MudTh>City</MudTh>
+        <MudTh>District</MudTh>
+        <MudTh>Mobile</MudTh>
+        <MudTh>NationalID</MudTh>
+        <MudTh>Action</MudTh>
+
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="id">@context.TeacherId</MudTd>
+            <MudTd DataLabel="fullname">@context.FirstName @context.LastName</MudTd>
+            <MudTd DataLabel="phone">@context.Phone</MudTd>
+            <MudTd DataLabel="email">@context.Email</MudTd>
+            <MudTd DataLabel="address">@context.Address1 @context.Address2</MudTd>
+            <MudTd DataLabel="city">@context.City</MudTd>
+            <MudTd DataLabel="district">@context.District</MudTd>
+            <MudTd DataLabel="phonenb">@context.PhoneNumber</MudTd>
+            <MudTd DataLabel="nationalid">@context.NationalID</MudTd>
+
+
+            <MudTd DataLabel="">
+                <MudFab OnClick="@(()=> {})" Color="Color.Primary"
+                        StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+                <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+
+@code {
+    private List<Teacher> _teachers = new List<Teacher>();
+
+    [Parameter]
+
+    public string SearchTerm { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync("")).ToList();
+
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+
+    }
+
+}

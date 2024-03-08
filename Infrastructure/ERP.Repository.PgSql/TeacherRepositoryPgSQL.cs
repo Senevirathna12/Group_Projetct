@@ -27,5 +27,10 @@ namespace ERP.Repository.PgSql
             return Task.CompletedTask;
         }
 
+        public async Task<IEnumerable<Teacher>> GetAllTeachersAsync(string name)
+        {
+            using var _context = _factory.CreateDbContext();
+            return await _context.Teachers.ToListAsync();
+        }
     }
 }
