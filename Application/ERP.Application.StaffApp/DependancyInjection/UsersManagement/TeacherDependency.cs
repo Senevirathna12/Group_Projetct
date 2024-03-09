@@ -1,5 +1,5 @@
-﻿using ERP.Application.StaffApp.Interfaces;
-using ERP.Application.StaffApp.UseCases;
+﻿using ERP.Application.StaffApp.Interfaces.UsersManagement;
+using ERP.Application.StaffApp.UseCases.UsersManagement;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP.Application.StaffApp.DependancyInjection
+namespace ERP.Application.StaffApp.DependancyInjection.UsersManagement
 {
     public static class TeacherDependancy
     {
@@ -16,6 +16,7 @@ namespace ERP.Application.StaffApp.DependancyInjection
         {
             services.AddScoped<IAddTeacherUseCase, AddTeacherUseCase>();
             services.AddScoped<IViewTeacherByNameUseCase, ViewTeacherByNameUseCase>();
+            services.AddScoped<IDeleteTeacherUseCase, DeleteTeacherUseCase>();
 
             return services;
         }

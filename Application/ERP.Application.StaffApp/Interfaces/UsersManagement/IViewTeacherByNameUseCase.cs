@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERP.Application.StaffApp.Interfaces
+namespace ERP.Application.StaffApp.Interfaces.UsersManagement
 {
     public interface IViewTeacherByNameUseCase
     {

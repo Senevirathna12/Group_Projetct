@@ -1,4 +1,4 @@
-﻿using ERP.Application.StaffApp.ReporsitoryInterface;
+﻿using ERP.Application.StaffApp.ReporsitoryInterface.UsersManagement;
 using ERP.Domain.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,6 +25,13 @@ namespace ERP.Repository.PgSql
             _context.Teachers.Add(teacher);
             _context.SaveChanges();
             return Task.CompletedTask;
+        }
+
+        public async Task DeleteTeacherAsync(Teacher teacher)
+        {
+            using var _context = _factory.CreateDbContext();
+            _context.Teachers.Remove(teacher);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Teacher>> GetAllTeachersAsync(string name)

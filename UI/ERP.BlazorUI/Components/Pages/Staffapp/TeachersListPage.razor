@@ -1,10 +1,12 @@
 ﻿@page "/teachersList"
 
-@using ERP.Application.StaffApp.Interfaces
+
+@using ERP.Application.StaffApp.Interfaces.UsersManagement
 @using ERP.Domain.Core.Entity
 @using FluentValidation
 
 @inject IViewTeacherByNameUseCase ViewTeacherByNameUseCase
+@inject IDeleteTeacherUseCase DeleteTeacherUseCase
 
 
 <h3>Teachers List</h3>
@@ -40,7 +42,7 @@
             <MudTd DataLabel="">
                 <MudFab OnClick="@(()=> {})" Color="Color.Primary"
                         StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
-                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@(()=> DeleteTeacher(@context))" />
                 <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
             </MudTd>
         </RowTemplate>
@@ -57,16 +59,44 @@
 
     public string SearchTerm { get; set; } = string.Empty;
 
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync("")).ToList();
+
+    // }
+
+    // protected override async Task OnParametersSetAsync()
+    // {
+    //     _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+
+    // }
+
+    
+
+    
+
     protected override async Task OnInitializedAsync()
     {
-        _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync("")).ToList();
-
+        await LoadTeachers();
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+        await LoadTeachers();
+    }
 
+    private async Task LoadTeachers()
+    {
+        _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+    }
+
+    private async Task DeleteTeacher(Teacher teacher)
+    {
+        // Call the delete use case to delete the teacher
+        await DeleteTeacherUseCase.ExecuteAsync(teacher);
+
+        // Reload the teachers list after deletion
+        await LoadTeachers();
     }
 
 }

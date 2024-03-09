@@ -5,7 +5,7 @@
 @inject IEditStudentUseCase EditStudentUseCase
 @inject IViewStudentById ViewStudentById
 
-<h3>AddStudent</h3>
+<h3>Edit Student</h3>
 
 
 <MudCard>
@@ -252,48 +252,16 @@
         await form.Validate();
 
 
-
-
-
-
-
         if (form.IsValid)
-
-
 
         {
 
-
-
             await EditStudentUseCase.ExecuteAsync(model);
-
-
 
         }
 
 
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
