@@ -1,0 +1,75 @@
+@page "/ModulesListPage"
+
+@using ERP.Domain.Core.Entity
+@using ERP.Application.StaffApp.Interfaces
+@using FluentValidation
+
+@inject IViewModuleByNameUseCase ViewModuleByNameUseCase
+@inject IDeleteModuleUseCase DeleteModuleUseCase
+
+<h3>Module List</h3>
+
+<MudTextField @bind-Value="SearchTerm" Label="Search by Name" Placeholder="Enter name" />
+
+<MudTable Items="@_modules" HeaderClass="custom-header-class" RowClass="custom-row-class">
+    <HeaderContent>
+        <MudTh>ID</MudTh>
+        <MudTh>Module Name</MudTh>
+        <MudTh>Semester</MudTh>
+        <MudTh>Credit</MudTh>
+        <MudTh>Teacher ID</MudTh>
+
+    </HeaderContent>
+    <RowTemplate>
+            <MudTd DataLabel="id">@context.ModuleId</MudTd>
+            <MudTd DataLabel="modulename">@context.ModuleName</MudTd>
+            <MudTd DataLabel="semester">@context.semester</MudTd>
+            <MudTd DataLabel="credit">@context.Credit</MudTd>
+            <MudTd DataLabel="teacherid">@context.teacherId</MudTd>
+
+
+
+            <MudTd DataLabel="">
+                <MudFab OnClick="@(()=> {})" Color="Color.Primary"
+                        StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@(()=> DeleteModule(@context))" />
+                <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+@code {
+    private List<NewModule> _modules = new List<NewModule>();
+
+    [Parameter]
+
+    public string SearchTerm { get; set; } = string.Empty;
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadModules();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadModules();
+    }
+
+    private async Task LoadModules()
+    {
+        _modules = (await ViewModuleByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+    }
+    
+    private async Task DeleteModule(NewModule mod)
+    {
+        // Call the delete use case to delete the teacher
+        await DeleteModuleUseCase.ExecuteAsync(mod);
+
+        // Reload the teachers list after deletion
+        await LoadModules();
+    }
+}

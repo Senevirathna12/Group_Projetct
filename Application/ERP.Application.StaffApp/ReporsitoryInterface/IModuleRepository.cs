@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace ERP.Application.StaffApp.ReporsitoryInterface
 {
-	public interface IModuleRepository
-	{
-		Task AddModuleAsync(NewModule newModule);
-	}
+    public interface IModuleRepository
+    {
+        Task AddModuleAsync(NewModule newModule);
+        Task EditModuleAsync(NewModule editModule);
+        Task DeleteModuleAsync(NewModule deleteModule);
+		
+        Task<IEnumerable<NewModule>> GetAllModulesAsync(string name);
+    }
 }

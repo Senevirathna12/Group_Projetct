@@ -1,4 +1,4 @@
-﻿using ERP.Application.StaffApp.Interfaces;
+using ERP.Application.StaffApp.Interfaces;
 using ERP.Application.StaffApp.ReporsitoryInterface;
 using ERP.Domain.Core.Entity;
 using System;
@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace ERP.Application.StaffApp.UseCases
 {
-    public class AddModuleUseCase : IAddModuleUseCase
+    public class EditModuleUseCase : IEditModuleUseCase
     {
         private readonly IModuleRepository _moduleRepository;
 
-        public AddModuleUseCase(IModuleRepository moduleRepository)
+        public EditModuleUseCase(IModuleRepository moduleRepository)
         {
             _moduleRepository = moduleRepository;
 
         }
-        public async Task ExecuteAsync(NewModule newModule)
+        public async Task ExecuteAsync(NewModule editModule)
         {
-            await _moduleRepository.AddModuleAsync(newModule);
+            await _moduleRepository.EditModuleAsync(editModule);
         }
     }
 }
