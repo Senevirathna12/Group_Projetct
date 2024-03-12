@@ -110,7 +110,8 @@
 
     {
 
-        var parameters = new DialogParameters<EditStudentDialog> { { x => x.student, student } };
+        var parameters = new DialogParameters();
+        parameters.Add(nameof(EditStudentDialog.student), student);
 
 
         var dialog = await DialogService.ShowAsync<EditStudentDialog>("Save", parameters);
