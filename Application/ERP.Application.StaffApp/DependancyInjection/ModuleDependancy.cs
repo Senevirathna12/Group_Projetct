@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 namespace ERP.Application.StaffApp.DependancyInjection
 {
     public static class ModuleDependancy
-	{
-		public static IServiceCollection AddModuleServices(
-			this IServiceCollection services)
-		{
-			services.AddScoped<IAddModuleUseCase,AddModuleUseCase>();
+    {
+        public static IServiceCollection AddModuleServices(
+            this IServiceCollection services)
+        {
+            services.AddScoped<IAddModuleUseCase,AddModuleUseCase>();
+            services.AddScoped<IEditModuleUseCase, EditModuleUseCase>();
+            services.AddScoped<IViewModuleByNameUseCase, ViewModuleByNameUseCase>();
+            services.AddScoped<IDeleteModuleUseCase, DeleteModuleUseCase>();
 			
-			return services;
-		}
-	}
+            return services;
+        }
+    }
 }
