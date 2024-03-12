@@ -5,6 +5,8 @@
 @inject ISnackbar Snackbar
 @inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
 @inject IDialogService DialogService
+
+@inject IEditStudentUseCase EditStudentUseCase
 <MudDialogProvider />
 <MudDialog Class="my-custom-dialog">
     <TitleContent>
@@ -14,11 +16,11 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField Value="@student.StudentId" Label="Student ID" ReadOnly="true" />
-        <MudTextField Value="@student.FirstName" Label="First Name" />
-        <MudTextField Value="@student.LastName" Label="Last Name" />
-        <MudTextField Value="@student.Address1" Label="Address" />
-        <MudTextField Value="@student.Email" Label="Email" />
+        <MudTextField @bind-Value="@student.StudentId" Label="Student ID" ReadOnly="true" />
+        <MudTextField @bind-Value="@student.FirstName" Label="First Name" />
+        <MudTextField @bind-Value="@student.LastName" Label="Last Name" />
+        <MudTextField @bind-Value="@student.Address1" Label="Address" />
+        <MudTextField @bind-Value="@student.Email" Label="Email" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
@@ -38,57 +40,7 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-
-
-
-
-
-
     [Parameter] public ERP.Domain.Core.Entity.Student student { get; set; } = new();
-
-
-
-
-
-
-
-    private List<Student> _students = new List<Student>();
-
-
-
-
-
-
-
-    // Your existing code...
-
-
-
-
-
-
-
-    protected override async Task OnInitializedAsync()
-
-
-
-    {
-
-
-
-        _students = (await ViewStudentsByNameUseCase.ExecuteAsync("")).ToList();
-
-
-
-    }
-
-
-
-
-
-
-
-
 
 
 
@@ -112,29 +64,14 @@
 
 
 
-    private void SaveStudent()
+    private async void SaveStudent()
 
 
 
     {
+        await EditStudentUseCase.ExecuteAsync(student);
 
-
-
-        // Save the changes to the database or perform any other necessary actions
-
-
-
-        // For example, you might want to call a method like UpdateStudentInDataSource
-
-
-
-        UpdateStudentInDataSource(student);
-
-
-
-
-
-
+        Snackbar.Add("Student Edit Succesfully", Severity.Success);
 
         MudDialog.Close(DialogResult.Ok(student.StudentId));
 
@@ -152,49 +89,7 @@
 
 
 
-    private void UpdateStudentInDataSource(ERP.Domain.Core.Entity.Student updatedStudent)
 
 
-
-    {
-
-
-
-        // Implement the logic to update the student in your data source
-
-
-
-        // For example, if _students is a list, find the corresponding student and update its properties
-
-
-
-        var existingStudent = _students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
-
-
-
-        if (existingStudent != null)
-
-
-
-        {
-
-
-
-            existingStudent.FirstName = updatedStudent.FirstName;
-
-
-
-            existingStudent.LastName = updatedStudent.LastName;
-
-
-
-            // Update other properties as needed
-
-
-
-        }
-
-
-
-    }
+    
 }
