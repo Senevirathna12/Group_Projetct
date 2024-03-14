@@ -1,9 +1,11 @@
 ﻿@using ERP.Application.StudentApp.Students.Interfaces
 @using ERP.Domain.Core.Entity;
+@using ERP.Application.StudentApp.Students
 
 @inject NavigationManager NavigationManager
 @inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
 @inject IDialogService DialogService
+@inject IDeleteStudentUseCase DeleteStudentUseCase
 
 <div style="text-align: center; margin-bottom: 0;">
     <h2><u>STUDENT'S LIST</u></h2>
@@ -33,7 +35,7 @@
         <MudTd DataLabel="">
             <MudFab OnClick="@(()=> EditStudent(@context))" Color="Color.Primary"
                 StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
-            <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+            <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@(()=> DeleteStudent(@context))" />
             <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
         </MudTd>
     </RowTemplate>
@@ -83,27 +85,34 @@
 
 
     public string SearchTerm { get; set; } = string.Empty;
-
+    
     protected override async Task OnInitializedAsync()
-
     {
-
-
-        _students = (await ViewStudentsByNameUseCase.ExecuteAsync("")).ToList();
-
-
+        await LoadStudents();
     }
-
 
     protected override async Task OnParametersSetAsync()
-
-
     {
-
-
-        _students = (await ViewStudentsByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
-
+        await LoadStudents();
     }
+
+    private async Task LoadStudents()
+    {
+        _students = (await ViewStudentsByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+    }
+
+
+    
+    private async Task DeleteStudent(Student student)
+    {
+        // Call the delete use case to delete the student
+        await DeleteStudentUseCase.ExecuteAsync(student);
+
+        // Reload the students list after deletion
+        await LoadStudents();
+    }
+    
+    
 
 
     async Task EditStudent(Student student)

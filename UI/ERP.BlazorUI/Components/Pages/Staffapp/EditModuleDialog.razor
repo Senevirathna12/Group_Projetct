@@ -1,0 +1,97 @@
+@using ERP.Application.StaffApp.Interfaces
+@using ERP.Application.StaffApp.ReporsitoryInterface
+@using ERP.Domain.Core.Entity
+@using Microsoft.AspNetCore.Components.Web
+
+@inject ISnackbar Snackbar
+@inject IViewModuleByNameUseCase ViewModuleByNameUseCase
+@inject IDialogService DialogService
+
+@inject IEditModuleUseCase EditModuleUseCase
+<MudDialogProvider />
+<MudDialog Class="my-custom-dialog">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.DeleteForever" Class="mr-3 mb-n1" />
+            Edit Module
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="@module.ModuleId" Label="Module ID" ReadOnly="true" />
+        <MudTextField @bind-Value="@module.ModuleName" Label="Module Name" />
+        <MudTextField @bind-Value="@module.semester" Label="Semester" />
+        <MudTextField @bind-Value="@module.teacherId" Label="Teacher ID" />
+        <MudTextField @bind-Value="@module.Credit" Label="Credit" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="SaveModule">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .my-custom-dialog {
+        max-width: 400px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public ERP.Domain.Core.Entity.NewModule module { get; set; } = new();
+
+
+
+    private void Cancel()
+
+
+
+    {
+
+
+
+        MudDialog.Cancel();
+
+
+
+    }
+
+
+
+
+
+
+
+    private async void SaveModule()
+
+
+
+    {
+        await EditModuleUseCase.ExecuteAsync(module);
+
+        Snackbar.Add("Module Edit Succesfully", Severity.Success);
+
+        MudDialog.Close(DialogResult.Ok(module.ModuleId));
+
+
+
+    }
+
+
+
+
+
+
+
+    // Assuming you have a method to update the student in your data source
+
+
+
+
+
+    
+}
+

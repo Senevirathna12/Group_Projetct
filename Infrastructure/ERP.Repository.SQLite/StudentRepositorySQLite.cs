@@ -47,6 +47,12 @@ namespace ERP.Repository.SQLite
             using var _context = _contextFactory.CreateDbContext();
             return await Task.FromResult(_context.Students.Any(x => x.StudentId == student.StudentId));
         }
+        public async Task DeleteStudentAsync(Student student)
+        {
+            using var _context = _contextFactory.CreateDbContext();
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+        }
     
 
         public async Task<IEnumerable<Student>> GetAllStudentsAsync(string name)

@@ -56,6 +56,12 @@ namespace ERP.Repository.PgSql
             using var _context = _factory.CreateDbContext();
             return await _context.Students.ToListAsync();
         }
+        public async Task DeleteStudentAsync(Student student)
+        {
+            using var _context = _factory.CreateDbContext();
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<Student> GetStudentById(int studentId)
         {
