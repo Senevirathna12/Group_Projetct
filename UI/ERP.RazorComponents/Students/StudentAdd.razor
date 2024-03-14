@@ -8,7 +8,7 @@
 @inject IAddStudentUseCase AddStudentUseCase;
 @inject ISnackbar Snackbar;
 
-<MudCard Class="my-custom-card" Background="Color.Error">
+<MudCard Class="my-custom-card">
     <MudForm Model="@model" @ref="@form" Validation="@(studentValidator.ValidateValue)" ValidationDelay="0">
         <MudCardContent>
             <MudTextField @bind-Value="model.FirstName" For="@(() => model.FirstName)" Immediate="true"
@@ -45,19 +45,16 @@
 </div>
 <style>
     .my-custom-card {
-
         max-width: 800px;
-
         margin: auto;
-
         padding: 20px;
-
         border-radius: 8px;
-
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ced4da; /* Gray border */
     }
 </style>
+
 
 
 

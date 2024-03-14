@@ -4,23 +4,23 @@
 @inject NavigationManager NavigationManager
 @inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
 
-<MudTable Items="@_students">
+<MudTable Items="@_students" Class="custom-table">
     <HeaderContent>
-        <MudTh>Number</MudTh>
-        <MudTh>Name</MudTh>
-        <MudTh>Email</MudTh>
         <MudTh>RegNB</MudTh>
+        <MudTh>Full Name</MudTh>
         <MudTh>Email</MudTh>
-        <MudTh>Mobile NB</MudTh>
+        <MudTh>MobileNB</MudTh>
+        <MudTh>NationalID</MudTh>
+        <MudTh>District</MudTh>
         @* <MudTh>Image</MudTh> *@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="regno">@context.RegistrationNum</MudTd>
         <MudTd DataLabel="fullname">@context.FirstName @context.LastName </MudTd>
         <MudTd DataLabel="email">@context.Email</MudTd>
-        <MudTd DataLabel="regnb">@context.RegistrationNum</MudTd>
-        <MudTd DataLabel="id">@context.NationalID</MudTd>
-        <MudTd DataLabel="mobile">@context.PhoneNumber</MudTd>
+        <MudTd DataLabel="mobilenb">@context.PhoneNumber</MudTd>
+        <MudTd DataLabel="nationalid">@context.NationalID</MudTd>
+        <MudTd DataLabel="district">@context.District</MudTd>
 
         @* <MudTd DataLabel="image">
             <MudImage Src="images/woman.png" Width="40" />
@@ -30,6 +30,24 @@
         <MudTablePager />
     </PagerContent>
 </MudTable>
+
+<style>
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .custom-table th, .custom-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .custom-table th {
+            background-color: #f2f2f2;
+        }
+</style>
+
 
 @code {
 

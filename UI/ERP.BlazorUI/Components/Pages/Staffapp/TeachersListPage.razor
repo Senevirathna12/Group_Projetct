@@ -9,33 +9,28 @@
 @inject IDeleteTeacherUseCase DeleteTeacherUseCase
 
 
-<h3>Teachers List</h3>
 
-<MudTextField @bind-Value="SearchTerm" Label="Search by Name" Placeholder="Enter name" />
+<div style="text-align: center; margin-bottom: 0;">
+    <h2><u>TEACHER'S LIST</u></h2>
+</div>
 
-<MudTable Items="@_teachers" HeaderClass="custom-header-class" RowClass="custom-row-class">
+
+<MudTable Items="@_teachers" Class="custom-table">
     <HeaderContent>
-        <MudTh>ID</MudTh>
+        <MudTh >ID</MudTh>
         <MudTh>Full Name</MudTh>
-        <MudTh>Phone</MudTh>
         <MudTh>E-mail</MudTh>
-        <MudTh>Address</MudTh>
-        <MudTh>City</MudTh>
-        <MudTh>District</MudTh>
         <MudTh>Mobile</MudTh>
+        <MudTh>District</MudTh>
         <MudTh>NationalID</MudTh>
-        <MudTh>Action</MudTh>
+        <MudTh >Action</MudTh>
 
     </HeaderContent>
     <RowTemplate>
             <MudTd DataLabel="id">@context.TeacherId</MudTd>
             <MudTd DataLabel="fullname">@context.FirstName @context.LastName</MudTd>
-            <MudTd DataLabel="department">@context.Department</MudTd>
-            <MudTd DataLabel="phone">@context.Phone</MudTd>
             <MudTd DataLabel="email">@context.Email</MudTd>
-            <MudTd DataLabel="address">@context.Address1 @context.Address2</MudTd>
-            <MudTd DataLabel="city">@context.City</MudTd>
-            <MudTd DataLabel="district">@context.District</MudTd>
+            <MudTd DataLabel="district">@context.District</MudTd>     
             <MudTd DataLabel="phonenb">@context.PhoneNumber</MudTd>
             <MudTd DataLabel="nationalid">@context.NationalID</MudTd>
 
@@ -51,6 +46,32 @@
             <MudTablePager />
         </PagerContent>
     </MudTable>
+
+    <style>
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .custom-table th, .custom-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            .custom-table th {
+                background-color: #f6efef;
+                color: #000000;
+                font-size: large;
+                font-weight: 600;
+                font-family: sans-serif;
+            }
+
+            .custom-table td {
+                background-color: #54a3c2;
+                color: #000000;
+            }
+    </style>
 
 
 @code {

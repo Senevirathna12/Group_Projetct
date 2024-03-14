@@ -5,11 +5,20 @@
 
 @inject IAddTeacherUseCase AddTeacherUseCase
 
-<h2><c>ADD Teacher</c></h2>
+<style>
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+    }
 
-<MudCard>
-    <MudForm Model="@model"
-             @ref="@form">
+  
+</style>
+
+<h2><c>ADD A NEW TEACHER</c></h2>
+
+<MudCard Class="my-custom-card" >
+    <MudForm Model="@model" @ref="@form">
         <MudCardContent>
             <MudTextField @bind-Value="model.TeacherId"
                           Immediate="true"
@@ -59,8 +68,6 @@
             <MudTextField @bind-Value="model.modules"
                           Immediate="true"
                           Label="Modules" />
-
-
         </MudCardContent>
     </MudForm>
     <MudCardActions>
@@ -70,23 +77,30 @@
                    OnClick="@(async () => await Submit())">Update</MudButton>
     </MudCardActions>
 </MudCard>
+
+
+
+<style>
+    .my-custom-card {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ced4da; /* Gray border */
+    }
+</style>
+
+
 @code {
     private Teacher model = new Teacher();
-
-
-    MudForm form;
-
-
+    private MudForm form;
+   
 
     private async Task Submit()
     {
-
-
         await AddTeacherUseCase.ExecuteAsync(model);
-
+     
     }
-
-
-
-
 }
