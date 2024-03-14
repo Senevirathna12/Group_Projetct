@@ -62,6 +62,11 @@ namespace ERP.Repository.InMemory
             _students.Add(student);
             return Task.CompletedTask;
         }
+        public async Task DeleteStudentAsync(Student student)
+        {
+            _students.Remove(student);
+
+        }
 
         public Task EditStudentAsync(Student std)
         {

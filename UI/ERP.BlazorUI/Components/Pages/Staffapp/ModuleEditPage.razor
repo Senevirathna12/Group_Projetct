@@ -1,0 +1,164 @@
+@page "/ModuleEditPage/{ModuleId:int}"
+
+@using ERP.Domain.Core.Entity
+@using ERP.Application.StaffApp.Interfaces
+@using FluentValidation
+
+@inject IEditModuleUseCase EditModuleUseCase
+@inject IViewModuleById ViewModuleById
+
+
+
+<h3>ModuleEditPage</h3>
+
+<MudCard>
+    <MudForm Model="@model" @ref="@form" Validation="@(moduleValidator.ValidateValue)" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.ModuleName" For="@(() => model.ModuleName)" Immediate="true"
+                Label="Module Name" />
+
+            <MudTextField @bind-Value="model.semester" For="@(() => model.semester)" Immediate="true"
+                Label="Semester" />
+            <MudTextField @bind-Value="model.teacherId" For="@(() => model.teacherId)" Immediate="true"
+                Label="Teacher ID" />
+
+            <MudTextField @bind-Value="model.Credit" For="@(() => model.Credit)" Immediate="true" Label="Credit" />
+
+
+
+
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto"
+            OnClick="@(async () => await Submit())">Add</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+
+@code {
+    private NewModule model;
+    
+    [Parameter]
+    public int ModuleId { get; set; }
+    ModuleModelValidator moduleValidator = new ModuleModelValidator();
+    MudForm form;
+    public class ModuleModelValidator : AbstractValidator<NewModule>
+    
+    {
+        
+        public ModuleModelValidator()
+        
+        {
+            
+            RuleFor(x => x.ModuleName).NotEmpty().Length(1, 100);
+            RuleFor(x => x.semester).NotEmpty();
+            RuleFor(x => x.teacherId).NotEmpty();
+            RuleFor(x => x.Credit).NotEmpty();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+
+
+
+        {
+
+
+
+            var result = await ValidateAsync(ValidationContext<NewModule>
+
+
+
+    .CreateWithOptions((NewModule)model, x => x.IncludeProperties(propertyName)));
+
+
+
+            if (result.IsValid)
+
+
+
+                return Array.Empty<string>();
+
+
+
+            return result.Errors.Select(e => e.ErrorMessage);
+
+
+
+        };
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private async Task Submit()
+
+
+
+    {
+
+
+
+        await form.Validate();
+
+
+        if (form.IsValid)
+
+        {
+
+            await EditModuleUseCase.ExecuteAsync(model);
+
+        }
+
+
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+
+
+
+    {
+
+
+
+        model = await ViewModuleById.ExecuteAsync(ModuleId);
+
+
+
+    }
+}

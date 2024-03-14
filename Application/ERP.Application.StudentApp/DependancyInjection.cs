@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAddStudentUseCase, AddStudentUseCase>();
             services.AddScoped<IViewStudentById, ViewStudentById>();
             services.AddScoped<IEditStudentUseCase, EditStudentUseCase>();
+            services.AddScoped<IDeleteStudentUseCase, DeleteStudentUseCase>();
 
             return services;
         }

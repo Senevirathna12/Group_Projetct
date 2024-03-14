@@ -13,6 +13,7 @@ namespace ERP.Application.StudentApp.Interfaces
         Task<bool> ExistAsync(Student student);
         Task AddStudentAsync(Student student);
         Task EditStudentAsync(Student student);
+        Task DeleteStudentAsync(Student student);
         Task<Student> GetStudentById(int studentId);
     }
 }

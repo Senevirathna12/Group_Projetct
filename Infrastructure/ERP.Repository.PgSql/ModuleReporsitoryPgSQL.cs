@@ -55,6 +55,12 @@ namespace ERP.Repository.PgSql
             using var _context = _factory.CreateDbContext();
             return await _context.Newmodules.ToListAsync();
         }
+        public async Task<NewModule> GetModulesById(int moduleId)
+        {
+            using var _context = _factory.CreateDbContext();
+            return await _context.Newmodules.FirstOrDefaultAsync(x => x.ModuleId == moduleId);
+
+        }
 
     }
 }

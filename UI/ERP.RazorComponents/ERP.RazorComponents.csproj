@@ -26,6 +26,7 @@
     <Folder Include="Department\" />
     <Folder Include="Academic\" />
     <Folder Include="SiteAdmin\" />
+    <Folder Include="StaffApp\" />
   </ItemGroup>
 
 </Project>

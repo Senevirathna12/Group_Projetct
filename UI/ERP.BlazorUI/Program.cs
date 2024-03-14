@@ -44,6 +44,7 @@ builder.Services.AddScoped<IViewStudentsByNameUseCase, ViewStudentsByNameUseCase
 builder.Services.AddScoped<IAddStudentUseCase, AddStudentUseCase>();
 builder.Services.AddScoped<IViewStudentById, ViewStudentById>();
 builder.Services.AddScoped<IEditStudentUseCase, EditStudentUseCase>();
+builder.Services.AddScoped<IDeleteStudentUseCase, DeleteStudentUseCase>();
 
 builder.Services.AddScoped<IModuleRepository, ModuleReporsitoryPgSQL>();
 builder.Services.AddScoped<IAddModuleUseCase, AddModuleUseCase>();

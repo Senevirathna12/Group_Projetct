@@ -12,6 +12,7 @@ namespace ERP.Application.StaffApp.ReporsitoryInterface
         Task AddModuleAsync(NewModule newModule);
         Task EditModuleAsync(NewModule editModule);
         Task DeleteModuleAsync(NewModule deleteModule);
+        Task<NewModule> GetModulesById(int moduleId);
 		
         Task<IEnumerable<NewModule>> GetAllModulesAsync(string name);
     }
