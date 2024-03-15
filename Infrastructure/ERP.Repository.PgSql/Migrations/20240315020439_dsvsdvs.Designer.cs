@@ -3,6 +3,7 @@ using System;
 using ERP.Repository.PgSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ERP.Repository.PgSql.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    partial class PgSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240315020439_dsvsdvs")]
+    partial class dsvsdvs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,10 +281,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.Property<int>("Credit")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ModuleCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("ModuleName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -406,13 +405,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Myah_Reichel@hotmail.com",
-                            FirstName = "Myah",
-                            LastName = "Reichel",
+                            Email = "Willard.Osinski66@hotmail.com",
+                            FirstName = "Willard",
+                            LastName = "Osinski",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2020/9157"
+                            RegistrationNum = "EG/2020/3819"
                         },
                         new
                         {
@@ -421,13 +420,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Deon_Murray69@gmail.com",
-                            FirstName = "Deon",
-                            LastName = "Murray",
+                            Email = "Tia_Bogan@gmail.com",
+                            FirstName = "Tia",
+                            LastName = "Bogan",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2023/4108"
+                            RegistrationNum = "EG/2021/2441"
                         },
                         new
                         {
@@ -436,13 +435,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Frederique16@gmail.com",
-                            FirstName = "Frederique",
-                            LastName = "Windler",
+                            Email = "Elaina_Bode65@hotmail.com",
+                            FirstName = "Elaina",
+                            LastName = "Bode",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/3056"
+                            RegistrationNum = "EG/2020/9932"
                         },
                         new
                         {
@@ -451,13 +450,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Jenifer.Pfeffer@gmail.com",
-                            FirstName = "Jenifer",
-                            LastName = "Pfeffer",
+                            Email = "Josianne.Hegmann17@yahoo.com",
+                            FirstName = "Josianne",
+                            LastName = "Hegmann",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/9933"
+                            RegistrationNum = "EG/2023/8500"
                         },
                         new
                         {
@@ -466,13 +465,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Lane_Kuhn@hotmail.com",
-                            FirstName = "Lane",
-                            LastName = "Kuhn",
+                            Email = "Audreanne.Bednar@yahoo.com",
+                            FirstName = "Audreanne",
+                            LastName = "Bednar",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/6080"
+                            RegistrationNum = "EG/2021/3289"
                         },
                         new
                         {
@@ -481,13 +480,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Andre_Pouros56@gmail.com",
-                            FirstName = "Andre",
-                            LastName = "Pouros",
+                            Email = "Gust_Senger29@gmail.com",
+                            FirstName = "Gust",
+                            LastName = "Senger",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2023/1750"
+                            RegistrationNum = "EG/2021/2132"
                         },
                         new
                         {
@@ -496,13 +495,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Marta_Johnston@gmail.com",
-                            FirstName = "Marta",
-                            LastName = "Johnston",
+                            Email = "Hector72@yahoo.com",
+                            FirstName = "Hector",
+                            LastName = "Schmitt",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/3619"
+                            RegistrationNum = "EG/2021/9454"
                         },
                         new
                         {
@@ -511,13 +510,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Melany_Brown55@yahoo.com",
-                            FirstName = "Melany",
-                            LastName = "Brown",
+                            Email = "Gerard_Haley@yahoo.com",
+                            FirstName = "Gerard",
+                            LastName = "Haley",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2021/7652"
+                            RegistrationNum = "EG/2020/1336"
                         },
                         new
                         {
@@ -526,13 +525,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Angie.Bogisich86@gmail.com",
-                            FirstName = "Angie",
-                            LastName = "Bogisich",
+                            Email = "Turner30@yahoo.com",
+                            FirstName = "Turner",
+                            LastName = "Weber",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2022/2899"
+                            RegistrationNum = "EG/2022/4587"
                         },
                         new
                         {
@@ -541,13 +540,13 @@ namespace ERP.Repository.PgSql.Migrations
                             Address2 = "",
                             City = "",
                             District = "",
-                            Email = "Chadrick.Gutkowski@hotmail.com",
-                            FirstName = "Chadrick",
-                            LastName = "Gutkowski",
+                            Email = "Harvey3@hotmail.com",
+                            FirstName = "Harvey",
+                            LastName = "Greenfelder",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = "",
-                            RegistrationNum = "EG/2021/7211"
+                            RegistrationNum = "EG/2021/2553"
                         });
                 });
 
@@ -646,9 +645,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Ben36@hotmail.com",
-                            FirstName = "Ben",
-                            LastName = "Nicolas",
+                            Email = "Florence55@hotmail.com",
+                            FirstName = "Florence",
+                            LastName = "DuBuque",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -662,9 +661,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Felix.Ferry64@yahoo.com",
-                            FirstName = "Felix",
-                            LastName = "Ferry",
+                            Email = "Madelyn_Jast@hotmail.com",
+                            FirstName = "Madelyn",
+                            LastName = "Jast",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -678,9 +677,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Reed63@gmail.com",
-                            FirstName = "Reed",
-                            LastName = "Blick",
+                            Email = "Amara10@yahoo.com",
+                            FirstName = "Amara",
+                            LastName = "Vandervort",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -694,9 +693,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Trycia66@gmail.com",
-                            FirstName = "Trycia",
-                            LastName = "Littel",
+                            Email = "Alphonso.Shields@yahoo.com",
+                            FirstName = "Alphonso",
+                            LastName = "Shields",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -710,9 +709,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Garrick.Boyle@yahoo.com",
-                            FirstName = "Garrick",
-                            LastName = "Boyle",
+                            Email = "Electa_OHara@hotmail.com",
+                            FirstName = "Electa",
+                            LastName = "O'Hara",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -726,9 +725,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Cortney.Boehm@gmail.com",
-                            FirstName = "Cortney",
-                            LastName = "Boehm",
+                            Email = "Jacques39@gmail.com",
+                            FirstName = "Jacques",
+                            LastName = "Zemlak",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -742,9 +741,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Laurence81@gmail.com",
-                            FirstName = "Laurence",
-                            LastName = "Parisian",
+                            Email = "Eliane.Wyman@yahoo.com",
+                            FirstName = "Eliane",
+                            LastName = "Wyman",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -758,9 +757,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Anika_Labadie35@hotmail.com",
-                            FirstName = "Anika",
-                            LastName = "Labadie",
+                            Email = "Darrin78@gmail.com",
+                            FirstName = "Darrin",
+                            LastName = "Fisher",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -774,9 +773,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Terrence.Hills67@hotmail.com",
-                            FirstName = "Terrence",
-                            LastName = "Hills",
+                            Email = "Caitlyn37@yahoo.com",
+                            FirstName = "Caitlyn",
+                            LastName = "Fahey",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""
@@ -790,9 +789,9 @@ namespace ERP.Repository.PgSql.Migrations
                             Department = "",
                             District = "",
                             DoB = new DateOnly(1, 1, 1),
-                            Email = "Antwon66@yahoo.com",
-                            FirstName = "Antwon",
-                            LastName = "Rosenbaum",
+                            Email = "Alanis_Ratke92@gmail.com",
+                            FirstName = "Alanis",
+                            LastName = "Ratke",
                             NationalID = "",
                             Phone = "",
                             PhoneNumber = ""

@@ -40,6 +40,7 @@ namespace ERP.Repository.PgSql
             if (newModule != null)
             {
                 newModule.ModuleId = editModule.ModuleId;
+                newModule.ModuleCode = editModule.ModuleCode;
                 newModule.ModuleName = editModule.ModuleName;
                 newModule.semester = editModule.semester;
                 newModule.Teacher = editModule.Teacher;

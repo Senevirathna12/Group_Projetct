@@ -11,6 +11,8 @@ namespace ERP.Domain.Core.Entity
 	{
 		[Key]
 		public int ModuleId { get; set; }
+		
+		public  string ModuleCode { get; set; }
 
 		public string ModuleName { get; set; }
 

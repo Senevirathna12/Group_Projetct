@@ -9,9 +9,10 @@
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 
-<div style="text-align: center; margin-bottom: 0;">
-    <h2><u>MODULE'S LIST</u></h2>
-</div>
+
+
+
+
 
 
 
@@ -19,7 +20,8 @@
     <HeaderContent>
         <MudTh>ID</MudTh>
         <MudTh>Module Name</MudTh>
-        <MudTh>Semester</MudTh>
+        <MudTh>Module Code</MudTh>
+        <MudTh>Lecture Hours</MudTh>
         <MudTh>Credit</MudTh>
         <MudTh>Teacher ID</MudTh>
 
@@ -27,7 +29,8 @@
     <RowTemplate>
         <MudTd DataLabel="id">@context.ModuleId</MudTd>
         <MudTd DataLabel="modulename">@context.ModuleName</MudTd>
-        <MudTd DataLabel="semester">@context.semester</MudTd>
+        <MudTd DataLabel="modulecode">@context.ModuleCode</MudTd>        
+        <MudTd DataLabel="lecturehours">@context.semester</MudTd>
         <MudTd DataLabel="credit">@context.Credit</MudTd>
         <MudTd DataLabel="teacherid">@context.teacherId</MudTd>
 
