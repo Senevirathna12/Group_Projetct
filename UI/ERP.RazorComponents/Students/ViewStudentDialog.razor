@@ -1,0 +1,98 @@
+﻿@using ERP.Application.StudentApp.Students.Interfaces
+@using ERP.Domain.Core.Entity
+@using Microsoft.AspNetCore.Components.Web
+
+@inject ISnackbar Snackbar
+@inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
+@inject IDialogService DialogService
+
+@inject IEditStudentUseCase EditStudentUseCase
+<MudDialogProvider />
+<MudDialog Class="my-custom-dialog">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.PermIdentity" Class="mr-3 mb-n1" />
+            View Student
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="@student.StudentId" Label="Student ID" ReadOnly="true" />
+        <MudTextField @bind-Value="@student.RegistrationNum" Label="RegNB" />
+        <MudTextField @bind-Value="@student.FirstName" Label="First Name" />
+        <MudTextField @bind-Value="@student.LastName" Label="Last Name" />
+        <MudTextField @bind-Value="@student.Email" Label="Email" />
+        <MudTextField @bind-Value="@student.PhoneNumber" Label="ContactNB" />
+        <MudTextField @bind-Value="@student.NationalID" Label="NationalID" />
+        <MudTextField @bind-Value="@student.District" Label="District" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        @* <MudButton Color="Color.Error" OnClick="SaveStudent">Save</MudButton> *@
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .my-custom-dialog {
+        max-width: 400px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public ERP.Domain.Core.Entity.Student student { get; set; } = new();
+
+
+
+    private void Cancel()
+
+
+
+    {
+
+
+
+        MudDialog.Cancel();
+
+
+
+    }
+
+
+
+
+
+
+
+    private async void SaveStudent()
+
+
+
+    {
+        await EditStudentUseCase.ExecuteAsync(student);
+
+        Snackbar.Add("Student Edit Succesfully", Severity.Success);
+
+        MudDialog.Close(DialogResult.Ok(student.StudentId));
+
+
+
+    }
+
+
+
+
+
+
+
+    // Assuming you have a method to update the student in your data source
+
+
+
+
+
+    
+}
