@@ -9,26 +9,29 @@
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 
-<h3>Module List</h3>
+
+<div style="text-align: center; margin-bottom: 0;">
+    <h2><u>MODULE LIST</u></h2>
+</div>
 
 
-
-<MudTable Items="@_modules" HeaderClass="custom-header-class" RowClass="custom-row-class">
+<MudTable Items="@_modules" Class="custom-table">
     <HeaderContent>
-        <MudTh>ID</MudTh>
+        <MudTh >ID</MudTh>
         <MudTh>Module Name</MudTh>
-        <MudTh>Semester</MudTh>
-        <MudTh>Credit</MudTh>
+        <MudTh>Module Code</MudTh>
+        <MudTh>Lecture Hours</MudTh>
+        <MudTh>Credits</MudTh>
         <MudTh>Teacher ID</MudTh>
 
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="id">@context.ModuleId</MudTd>
-        <MudTd DataLabel="modulename">@context.ModuleName</MudTd>
-        <MudTd DataLabel="semester">@context.semester</MudTd>
-        <MudTd DataLabel="credit">@context.Credit</MudTd>
-        <MudTd DataLabel="teacherid">@context.teacherId</MudTd>
-
+            <MudTd DataLabel="id">@context.ModuleId</MudTd>
+            <MudTd DataLabel="modulename">@context.ModuleName</MudTd>
+            <MudTd DataLabel="modulecode">@context.ModuleCode</MudTd>
+            <MudTd DataLabel="semester">@context.semester</MudTd>     
+            <MudTd DataLabel="credits">@context.Credit</MudTd>
+            <MudTd DataLabel="teacherid">@context.teacherId</MudTd>
 
 
         <MudTd DataLabel="">
@@ -44,29 +47,33 @@
 </MudTable>
 
 
-
-<div style="text-align: center; margin-top: 20px; background-color: aliceblue;">
-    <MudButton Color="Color.Primary" OnClick="@NavigateToModuleAddPage">Add Module</MudButton>
-
-</div>
-
-
 <style>
-    .custom-header-class {
-        background-color: #f6efef;
-        color: #f6efef;
-        font-size: large;
-        font-weight: 600;
-        font-family: sans-serif;
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    }
+            .custom-table th, .custom-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-    .custom-row-class {
-        background-color: #54a3c2;
-        color: #000000;
+            .custom-table th {
+                background-color: #f6efef;
+                color: #000000;
+                font-size: large;
+                font-weight: 600;
+                font-family: sans-serif;
+            }
 
-    }
+            .custom-table td {
+                background-color: #54a3c2;
+                color: #000000;
+            }
 </style>
+
+
 
 
 

@@ -16,6 +16,8 @@
         <MudCardContent>
             <MudTextField @bind-Value="model.ModuleName" For="@(() => model.ModuleName)" Immediate="true"
                 Label="Module Name" />
+            <MudTextField @bind-Value="model.ModuleCode" For="@(() => model.ModuleCode)" Immediate="true"
+                Label="Module Code" />
 
             <MudTextField @bind-Value="model.semester" For="@(() => model.semester)" Immediate="true"
                 Label="Semester" />
@@ -53,6 +55,7 @@
         {
             
             RuleFor(x => x.ModuleName).NotEmpty().Length(1, 100);
+            RuleFor(x => x.ModuleCode).NotEmpty().Length(1, 100);
             RuleFor(x => x.semester).NotEmpty();
             RuleFor(x => x.teacherId).NotEmpty();
             RuleFor(x => x.Credit).NotEmpty();

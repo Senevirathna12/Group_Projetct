@@ -4,37 +4,66 @@
 @using FluentValidation
 @inject IAddModuleUseCase AddModuleUseCase
 
-<MudCard>
-    <MudForm Model="@model"
-             @ref="@form">
+<style>
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+  
+</style>
+
+<h2><c>ADD A NEW MODULE</c></h2>
+
+<MudCard Class="my-custom-card" >
+    <MudForm Model="@model" @ref="@form">
         <MudCardContent>
+            <MudTextField @bind-Value="model.ModuleId"
+                          Immediate="true"
+                          Label="Module ID" />
+            <MudTextField @bind-Value="model.ModuleCode"
+                          Immediate="true"
+                          Label="Module Code" />            
             <MudTextField @bind-Value="model.ModuleName"
                           Immediate="true"
-                          Label="module name" />
+                          Label="Module Name" />
+            
             <MudTextField @bind-Value="model.semester"
                           Immediate="true"
-                          Label="semester" />
-            <MudTextField @bind-Value="model.teacherId"
-                          Immediate="true"
-                          Label="teacherID" />
-      
-            <MudTextField @bind-Value="model.Credit"
+                          Label="Lecture Hours" />
                           
+            <MudTextField @bind-Value="model.Credit"
                           Immediate="true"
                           Label="Credit" />
+            <MudTextField @bind-Value="model.teacherId"
+                          Immediate="true"
+                          Label="Teacher ID" />
 
             
-
-
         </MudCardContent>
     </MudForm>
     <MudCardActions>
         <MudButton Variant="Variant.Filled"
                    Color="Color.Primary"
                    Class="ml-auto"
-                   OnClick="@(async () => await Submit())">Update</MudButton>
+                   OnClick="@(async () => await Submit())">Add</MudButton>
     </MudCardActions>
 </MudCard>
+
+
+
+<style>
+    .my-custom-card {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ced4da; /* Gray border */
+    }
+</style>
 @code {
     private NewModule model = new NewModule();
 
