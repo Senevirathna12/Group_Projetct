@@ -10,11 +10,13 @@
 @inject IDialogService DialogService
 
 
-<h3>Module List</h3>
 
 
 
-<MudTable Items="@_modules" HeaderClass="custom-header-class" RowClass="custom-row-class">
+
+
+
+<MudTable Items="@_modules" Class="custom-table">
     <HeaderContent>
         <MudTh>ID</MudTh>
         <MudTh>Module Name</MudTh>
@@ -48,28 +50,37 @@
 
 
 
-<div style="text-align: center; margin-top: 20px; background-color: aliceblue;">
+@* <div style="text-align: center; margin-top: 20px; background-color: aliceblue;">
     <MudButton Color="Color.Primary" OnClick="@NavigateToModuleAddPage">Add Module</MudButton>
 
-</div>
+</div> *@
 
 
-<style>
-    .custom-header-class {
-        background-color: #f6efef;
-        color: #f6efef;
-        font-size: large;
-        font-weight: 600;
-        font-family: sans-serif;
+    <style>
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    }
+            .custom-table th, .custom-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-    .custom-row-class {
-        background-color: #54a3c2;
-        color: #000000;
+            .custom-table th {
+                background-color: #f6efef;
+                color: #000000;
+                font-size: large;
+                font-weight: 600;
+                font-family: sans-serif;
+            }
 
-    }
-</style>
+            .custom-table td {
+                background-color: #54a3c2;
+                color: #000000;
+            }
+    </style>
 
 
 
@@ -107,33 +118,13 @@
 
     private async Task DeleteModule(NewModule mod)
     {
-        // Call the delete use case to delete the teacher
+        
         await DeleteModuleUseCase.ExecuteAsync(mod);
 
-        // Reload the teachers list after deletion
         await LoadModules();
     }
 
-    /*async Task EditModule(NewModule module)
-
-    {
-
-        var parameters = new DialogParameters();
-        parameters.Add(nameof(EditModuleDialog.module), module);
-
-
-        var dialog = await DialogService.ShowAsync<EditModuleDialog>("Save", parameters);
-
-        var result = await dialog.Result;
-
-
-        if (!result.Canceled)
-
-        {
-
-             }
-
-    }*/
+  
     
     async Task EditModule(NewModule module)
     {
