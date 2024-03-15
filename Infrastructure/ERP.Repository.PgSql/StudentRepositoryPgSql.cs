@@ -34,11 +34,13 @@ namespace ERP.Repository.PgSql
 
             if (student != null)
             {
+                student.RegistrationNum = std.RegistrationNum;
                 student.FirstName = std.FirstName;
                 student.LastName = std.LastName;
                 student.Email = std.Email;
-                student.Phone = std.Phone;
-                student.Address1 = std.Address1;
+                student.PhoneNumber = std.PhoneNumber;
+                student.NationalID = std.NationalID;
+                student.District = std.District;
             }
 
             return Task.CompletedTask;

@@ -114,10 +114,8 @@
     
     private async Task DeleteStudent(Student student)
     {
-        // Call the delete use case to delete the student
+        
         await DeleteStudentUseCase.ExecuteAsync(student);
-
-        // Reload the students list after deletion
         await LoadStudents();
     }
     

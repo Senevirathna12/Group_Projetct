@@ -11,16 +11,19 @@
 <MudDialog Class="my-custom-dialog">
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.DeleteForever" Class="mr-3 mb-n1" />
+            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
             Edit Student
         </MudText>
     </TitleContent>
     <DialogContent>
         <MudTextField @bind-Value="@student.StudentId" Label="Student ID" ReadOnly="true" />
+        <MudTextField @bind-Value="@student.RegistrationNum" Label="RegNB" />
         <MudTextField @bind-Value="@student.FirstName" Label="First Name" />
         <MudTextField @bind-Value="@student.LastName" Label="Last Name" />
-        <MudTextField @bind-Value="@student.Address1" Label="Address" />
         <MudTextField @bind-Value="@student.Email" Label="Email" />
+        <MudTextField @bind-Value="@student.PhoneNumber" Label="ContactNB" />
+        <MudTextField @bind-Value="@student.NationalID" Label="NationalID" />
+        <MudTextField @bind-Value="@student.District" Label="District" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
