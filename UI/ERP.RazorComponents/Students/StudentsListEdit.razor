@@ -35,8 +35,10 @@
         <MudTd DataLabel="">
             <MudFab OnClick="@(()=> EditStudent(@context))" Color="Color.Primary"
                 StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
-            <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@(()=> DeleteStudent(@context))" />
-            <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
+            <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" 
+            OnClick="@(()=> DeleteStudent(@context))" />
+            <MudFab OnClick="@(()=> ViewStudent(@context))" Color="Color.Success"
+                StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -138,6 +140,27 @@
         if (!result.Canceled)
 
       {
+
+        }
+
+    }
+
+    async Task ViewStudent(Student student)
+
+    {
+
+        var parameters = new DialogParameters();
+        parameters.Add(nameof(EditStudentDialog.student), student);
+
+
+        var dialog = await DialogService.ShowAsync<ViewStudentDialog>("Save", parameters);
+
+        var result = await dialog.Result;
+
+
+        if (!result.Canceled)
+
+        {
 
         }
 

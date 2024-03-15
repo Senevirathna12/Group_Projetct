@@ -41,6 +41,7 @@ namespace ERP.Repository.PgSql
                 student.PhoneNumber = std.PhoneNumber;
                 student.NationalID = std.NationalID;
                 student.District = std.District;
+                _context.SaveChanges();
             }
 
             return Task.CompletedTask;
