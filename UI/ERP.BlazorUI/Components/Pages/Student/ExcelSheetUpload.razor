@@ -1,0 +1,120 @@
+﻿@page "/addTeacherFromExcel"
+@using ERP.Domain.Core.Entity
+@using Microsoft.AspNetCore.Components.Forms
+@using System.IO
+@using ERP.Application.StaffApp.Interfaces.UsersManagement
+@using FluentValidation
+
+<h2><c>ADD TEACHERS FROM EXCEL</c></h2>
+
+<InputFile @ref="fileInput" OnChange="HandleFileUpload" />
+
+@if (uploadError != null)
+{
+    <p>@uploadError</p>
+}
+
+@if (teachers != null && teachers.Any())
+{
+    <button class="btn btn-primary" @onclick="SaveAllTeachers">Save All Teachers</button>
+}
+
+@code {
+    private InputFile fileInput;
+    private string uploadError;
+    private List<Teacher> teachers;
+
+    [Inject]
+    private IAddTeacherUseCase AddTeacherUseCase { get; set; }
+
+    private async Task HandleFileUpload(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+
+        if (file != null)
+        {
+            try
+            {
+                teachers = await ReadTeachersFromExcel(file);
+            }
+            catch (Exception ex)
+            {
+                uploadError = $"Error uploading file: {ex.Message}";
+            }
+        }
+    }
+
+    private async Task<List<Teacher>> ReadTeachersFromExcel(IBrowserFile file)
+    {
+        var teachers = new List<Teacher>();
+
+        using (var memoryStream = new MemoryStream())
+        {
+            await file.OpenReadStream().CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+
+            // Load the Excel package using EPPlus
+            using (var package = new OfficeOpenXml.ExcelPackage(memoryStream))
+            {
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
+
+                if (worksheet != null)
+                {
+                    for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                    {
+                        var teacher = new Teacher
+                            {
+                                TeacherId = Convert.ToInt32(worksheet.Cells[row, 1].Value),
+                                FirstName = worksheet.Cells[row, 2].Value?.ToString(),
+                                LastName = worksheet.Cells[row, 3].Value?.ToString(),
+                                Department = worksheet.Cells[row, 4].Value?.ToString(),
+                                Email = worksheet.Cells[row, 5].Value?.ToString(),
+                                Phone = worksheet.Cells[row, 6].Value?.ToString(),
+                                Address1 = worksheet.Cells[row, 7].Value?.ToString(),
+                                Address2 = worksheet.Cells[row, 8].Value?.ToString(),
+                                City = worksheet.Cells[row, 9].Value?.ToString(),
+                                District = worksheet.Cells[row, 10].Value?.ToString(),
+                                PhoneNumber = worksheet.Cells[row, 11].Value?.ToString(),
+                                NationalID = worksheet.Cells[row, 12].Value?.ToString(),
+                                modules = ParseModules(worksheet.Cells[row, 13].Value?.ToString())
+                            };
+
+                        teachers.Add(teacher);
+                    }
+                }
+            }
+        }
+
+        return teachers;
+    }
+
+    private ICollection<NewModule> ParseModules(string modulesData)
+    {
+        if (string.IsNullOrEmpty(modulesData))
+            return new List<NewModule>();
+
+        // Assuming modules are separated by comma
+        var modulesArray = modulesData.Split(',');
+
+        var modules = new List<NewModule>();
+
+        foreach (var module in modulesArray)
+        {
+            // Create a new instance of NewModule for each module
+            modules.Add(new NewModule { ModuleName = module.Trim() });
+        }
+
+        return modules;
+    }
+
+    private async Task SaveAllTeachers()
+    {
+        if (teachers != null && teachers.Any())
+        {
+            foreach (var teacher in teachers)
+            {
+                await AddTeacherUseCase.ExecuteAsync(teacher);
+            }
+        }
+    }
+}
