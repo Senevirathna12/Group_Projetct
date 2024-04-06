@@ -6,7 +6,7 @@
 @using System.IO
 
 
-
+@inject NavigationManager Navigation
 @inject IAddTeacherUseCase AddTeacherUseCase
 @inject ISnackbar Snackbar
 
@@ -109,23 +109,7 @@
 </style>
 
 
-<h2><c>ADD TEACHERS FROM EXCEL</c></h2>
-<InputFile @ref="fileInput" OnChange="HandleFileUpload" />
 
-@* @if (uploadError != null)
-{
-    <p>@uploadError</p>
-} *@
-
-@* @if (successMessage != null)
-{
-    <p>@successMessage</p>
-} *@
-
-@if (teachers != null && teachers.Any())
-{
-    <button class="btn btn-primary" @onclick="SaveAllTeachers">Save All Teachers</button>
-}
 
 
 @code {
@@ -225,6 +209,8 @@
             if (allTeachersSaved)
             {
                 Snackbar.Add("All teachers saved successfully", MudBlazor.Severity.Success);
+                await Task.Delay(1500);
+                Navigation.NavigateTo("/teachersList");
             }
 
 
