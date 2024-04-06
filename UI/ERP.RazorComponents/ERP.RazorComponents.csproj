@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlusEnumerable" Version="1.4.0" />
+    <PackageReference Include="EPPlusExtensions" Version="1.0.14" />
     <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
     <PackageReference Include="MudBlazor" Version="6.11.1" />
