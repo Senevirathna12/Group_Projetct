@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ERP.Application.StaffApp.Interfaces.UsersManagement
 {
-    public interface IViewTeacherByNameUseCase
+    public interface IViewTeacherById
     {
-        Task<IEnumerable<Teacher>> ExecuteAsync(string name = "");
-
+        Task<Teacher> ExecuteAsync(int teacherId);
     }
 }

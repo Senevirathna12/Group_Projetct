@@ -5,8 +5,9 @@
 @inject ISnackbar Snackbar
 @inject IViewStudentsByNameUseCase ViewStudentsByNameUseCase
 @inject IDialogService DialogService
-
 @inject IEditStudentUseCase EditStudentUseCase
+
+
 <MudDialogProvider />
 <MudDialog Class="my-custom-dialog">
     <TitleContent>
@@ -49,27 +50,14 @@
 
     private void Cancel()
 
-
-
     {
 
-
-
         MudDialog.Cancel();
-
-
 
     }
 
 
-
-
-
-
-
     private async void SaveStudent()
-
-
 
     {
         await EditStudentUseCase.ExecuteAsync(student);
@@ -77,8 +65,6 @@
         Snackbar.Add("Student Edit Succesfully", Severity.Success);
 
         MudDialog.Close(DialogResult.Ok(student.StudentId));
-
-
 
     }
 

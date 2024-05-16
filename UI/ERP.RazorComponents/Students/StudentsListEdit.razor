@@ -79,7 +79,7 @@
 
 
 
-@code {
+    @code {
 
     private void NavigateToStudentAddPage()
 
@@ -95,7 +95,7 @@
 
 
     public string SearchTerm { get; set; } = string.Empty;
-    
+
     protected override async Task OnInitializedAsync()
     {
         await LoadStudents();
@@ -112,15 +112,15 @@
     }
 
 
-    
+
     private async Task DeleteStudent(Student student)
     {
-        
+
         await DeleteStudentUseCase.ExecuteAsync(student);
         await LoadStudents();
     }
-    
-    
+
+
 
 
     async Task EditStudent(Student student)
@@ -138,8 +138,8 @@
 
         if (!result.Canceled)
 
-      {
-
+        {
+            
         }
 
     }

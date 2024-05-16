@@ -11,6 +11,9 @@ namespace ERP.Application.StaffApp.ReporsitoryInterface.UsersManagement
     {
         Task AddTeacherAsync(Teacher teacher);
         Task DeleteTeacherAsync(Teacher teacher);
+        Task EditTeacherAsync(Teacher teacher);
+        Task<Teacher> GetTeacherById(int teacherId);
+        Task<bool> ExistAsync(Teacher teacher);
         Task<IEnumerable<Teacher>> GetAllTeachersAsync(string name);
     }
 }

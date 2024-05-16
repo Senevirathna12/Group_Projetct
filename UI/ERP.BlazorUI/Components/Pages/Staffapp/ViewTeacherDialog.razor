@@ -1,0 +1,60 @@
+﻿@using ERP.Application.StaffApp.Interfaces.UsersManagement
+@using ERP.Domain.Core.Entity
+@using Microsoft.AspNetCore.Components.Web
+
+
+@inject ISnackbar Snackbar
+@inject IViewTeacherByNameUseCase ViewTeacherByNameUseCase
+@inject IDialogService DialogService
+@inject IEditTeacherUseCase EditTeacherUseCase
+
+<MudDialogProvider />
+<MudDialog Class="my-custom-dialog">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.PermIdentity" Class="mr-3 mb-n1" />
+            View Lecturer
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="@teacher.TeacherId" Label="Student ID" ReadOnly="true" />
+        <MudTextField @bind-Value="@teacher.Department" Label="Department" />
+        <MudTextField @bind-Value="@teacher.FirstName" Label="First Name" />
+        <MudTextField @bind-Value="@teacher.LastName" Label="Last Name" />
+        <MudTextField @bind-Value="@teacher.Email" Label="Email" />
+        <MudTextField @bind-Value="@teacher.PhoneNumber" Label="ContactNB" />
+        <MudTextField @bind-Value="@teacher.NationalID" Label="NationalID" />
+        <MudTextField @bind-Value="@teacher.District" Label="District" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+
+    </DialogActions>
+</MudDialog>
+
+
+
+<style>
+    .my-custom-dialog {
+        max-width: 400px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public ERP.Domain.Core.Entity.Teacher teacher { get; set; } = new();
+
+
+
+    private void Cancel()
+    {
+
+        MudDialog.Cancel();
+    }
+
+}
