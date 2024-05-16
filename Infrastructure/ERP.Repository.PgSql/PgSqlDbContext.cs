@@ -1,5 +1,5 @@
 ﻿using ERP.Domain.Core.Entity;
-using ERP.Repository.PgSql.Configurations;
+//using ERP.Repository.PgSql.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Repository.PgSql
@@ -14,8 +14,8 @@ namespace ERP.Repository.PgSql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new StudentConfigurations());
-            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            //modelBuilder.ApplyConfiguration(new StudentConfigurations());
+            //modelBuilder.ApplyConfiguration(new TeacherConfiguration());
             
             modelBuilder.Entity<ModuleOfferingTeacher>()
             .HasKey(mt => new { mt.ModuleOfferingId, mt.TeacherId });
