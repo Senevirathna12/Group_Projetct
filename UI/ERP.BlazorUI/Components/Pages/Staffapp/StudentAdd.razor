@@ -1,0 +1,321 @@
+﻿@using ERP.Domain.Core.Entity
+@using FluentValidation
+@using ERP.Application.StudentApp.Students.Interfaces
+@using MudBlazor
+@using System.IO
+
+
+@inject NavigationManager NavigationManager
+@inject IAddStudentUseCase AddStudentUseCase;
+@inject ISnackbar Snackbar;
+
+<MudCard Class="my-custom-card">
+
+
+    <h5><c>ADD LECTURERS FROM EXCEL</c></h5>
+    <InputFile @ref="fileInput" OnChange="HandleFileUpload" />
+    @if (students != null && students.Any())
+    {
+        <button class="btn btn-primary" @onclick="SaveAllStudents">Save All Students</button>
+    }
+
+
+    <MudForm Model="@model" @ref="@form" Validation="@(studentValidator.ValidateValue)" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.FirstName"
+                         For="@(() => model.FirstName)" 
+                         Immediate="true"
+                         Label="FirstName" />
+
+            <MudTextField @bind-Value="model.LastName"
+                         For="@(() => model.LastName)"
+                         Immediate="true"
+                         Label="LastName" />
+
+            <MudTextField @bind-Value="model.RegistrationNum" 
+                           For="@(() => model.RegistrationNum)"
+                           Immediate="true"
+                           Label="Registration Number" />
+
+            <MudTextField @bind-Value="model.Email"
+                           For="@(() => model.Email)"
+                           Immediate="true"
+                           Label="Email" />
+            
+            <MudTextField @bind-Value="model.Address1"
+                         For="@(() => model.Address1)"
+                         Immediate="true" 
+                         Label="Address" />
+            <MudTextField @bind-Value="model.Address2"
+                          For="@(() => model.Address2)"
+                          Immediate="true"
+                          Label="Address" />
+            <MudTextField @bind-Value="model.Department"
+                          For="@(() => model.Department)"
+                          Immediate="true" 
+                          Label="Department" />
+            <MudTextField @bind-Value="model.District" 
+                          For="@(() => model.District)" 
+                          Immediate="true"
+                          Label="District" />
+
+            <MudTextField @bind-Value="model.NationalID"
+                          For="@(() => model.NationalID)"
+                          Immediate="true"
+                          Label="NationalID" />
+            <MudTextField @bind-Value="model.PhoneNumber"
+                          For="@(() => model.PhoneNumber)"
+                          Immediate="true"
+                          Label="MobileNumber" />
+            <MudTextField @bind-Value="model.Phone"
+                          For="@(() => model.Phone)"
+                          Immediate="true"
+                          Label="PhoneNumber(Home)" />
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto"
+            OnClick="@(async () => await Submit())">Add</MudButton>
+    </MudCardActions>
+    <MudButton Color="Color.Primary" OnClick="@NavigateToStudentEditPage">Back</MudButton>
+</MudCard>
+<div style="margin-top: 20px;">
+
+</div>
+<style>
+    .my-custom-card {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ced4da; /* Gray border */
+    }
+</style>
+
+
+
+
+
+
+@code {
+
+
+    private string successMessage;
+    private string errorMessage;
+    private InputFile fileInput;
+    private string uploadError;
+    private List<Student> students;
+
+    [Parameter]
+    public EventCallback onAdded { get; set; }
+
+
+    private Student model = new Student();
+
+    StudentModelValidator studentValidator = new StudentModelValidator();
+
+
+    MudForm form;
+
+    private async Task HandleFileUpload(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+
+        if (file != null)
+        {
+            try
+            {
+                students = await ReadStudentsFromExcel(file);
+
+
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add($"Error uploading file: {ex.Message}", MudBlazor.Severity.Error);
+            }
+        }
+    }
+
+    private async Task<List<Student>> ReadStudentsFromExcel(IBrowserFile file)
+    {
+        var students = new List<Student>();
+
+        using (var memoryStream = new MemoryStream())
+        {
+            await file.OpenReadStream().CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+
+            // Load the Excel package using EPPlus
+            using (var package = new OfficeOpenXml.ExcelPackage(memoryStream))
+            {
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
+
+                if (worksheet != null)
+                {
+                    for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                    {
+                        var model = new Student
+                            {
+                                RegistrationNum = worksheet.Cells[row, 1].Value?.ToString(),
+                                FirstName = worksheet.Cells[row, 2].Value?.ToString(),
+                                LastName = worksheet.Cells[row, 3].Value?.ToString(),
+                                Email = worksheet.Cells[row, 4].Value?.ToString(),
+                                Phone = worksheet.Cells[row, 5].Value?.ToString(),
+                                Address1 = worksheet.Cells[row, 6].Value?.ToString(),
+                                Address2 = worksheet.Cells[row, 7].Value?.ToString(),
+                                Department = worksheet.Cells[row,8].Value?.ToString(),
+                                District = worksheet.Cells[row, 9].Value?.ToString(),
+                                NationalID = worksheet.Cells[row, 10].Value?.ToString(),
+                                PhoneNumber = worksheet.Cells[row, 11].Value?.ToString(),
+                                //modules = ParseModules(worksheet.Cells[row, 13].Value?.ToString())
+                            };
+
+                        students.Add(model);
+                    }
+                }
+            }
+        }
+
+        return students;
+    }
+
+    private async Task SaveAllStudents()
+    {
+
+
+        if (students != null && students.Any())
+        {
+            bool allStudentsSaved = true;
+
+            foreach (var student in students)
+            {
+                try
+                {
+                    await AddStudentUseCase.ExecuteAsync(student);
+
+                }
+                catch (Exception ex)
+                {
+                    allStudentsSaved = false;
+                    Snackbar.Add($"Error saving student: {ex.Message}", MudBlazor.Severity.Error);
+                }
+            }
+
+            if (allStudentsSaved)
+            {
+                Snackbar.Add("All Students saved successfully", MudBlazor.Severity.Success);
+                await Task.Delay(1500);
+                NavigationManager.NavigateTo("/studenteditlist");
+            }
+
+
+            StateHasChanged(); // Update the UI
+        }
+    }
+
+
+
+
+
+
+
+
+    private void NavigateToStudentEditPage()
+
+    {
+
+        NavigationManager.NavigateTo("/studenteditlist");
+
+
+    }
+
+
+ 
+
+
+    public class StudentModelValidator : AbstractValidator<Student>
+
+    {
+
+        public StudentModelValidator()
+
+        {
+
+            RuleFor(x => x.FirstName)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+            RuleFor(x => x.LastName)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+            RuleFor(x => x.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .EmailAddress()
+            .MustAsync(async (value, cancellationToken) => await IsUniqueAsync(value));
+
+
+            RuleFor(x => x.Address1)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+        }
+
+
+        private async Task<bool> IsUniqueAsync(string email)
+
+        {
+
+            await Task.Delay(2000);
+            return email.ToLower() != "test@test.com";
+
+
+        }
+
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+
+            var result = await ValidateAsync(ValidationContext<Student>
+
+            .CreateWithOptions((Student)model, x => x.IncludeProperties(propertyName)));
+
+            if (result.IsValid)
+
+
+                return Array.Empty<string>();
+
+
+            return result.Errors.Select(e => e.ErrorMessage);
+
+
+
+        };
+
+
+    }
+
+
+    private async Task Submit()
+
+    {
+
+        await form.Validate();
+        if (form.IsValid)
+
+        {
+            await AddStudentUseCase.ExecuteAsync(model);
+            await onAdded.InvokeAsync();
+            Snackbar.Add("New student added successfully", MudBlazor.Severity.Success);
+
+
+        }
+
+    }
+}

@@ -1,4 +1,4 @@
-﻿@page "/addTeacherFromExcel"
+﻿@* @page "/addTeacherFromExcel"
 @using ERP.Domain.Core.Entity
 @using Microsoft.AspNetCore.Components.Forms
 @using System.IO
@@ -76,7 +76,7 @@
                                 District = worksheet.Cells[row, 10].Value?.ToString(),
                                 PhoneNumber = worksheet.Cells[row, 11].Value?.ToString(),
                                 NationalID = worksheet.Cells[row, 12].Value?.ToString(),
-                                modules = ParseModules(worksheet.Cells[row, 13].Value?.ToString())
+                               // modules = ParseModules(worksheet.Cells[row, 13].Value?.ToString())
                             };
 
                         teachers.Add(teacher);
@@ -118,3 +118,4 @@
         }
     }
 }
+ *@
