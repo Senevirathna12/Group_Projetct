@@ -19,6 +19,7 @@
 <MudTable Items="@_modules" Class="custom-table">
     <HeaderContent>
         <MudTh>ID</MudTh>
+        <MudTh>Department</MudTh>
         <MudTh>Module Name</MudTh>
         <MudTh>Module Code</MudTh>
         <MudTh>Lecture Hours</MudTh>
@@ -29,6 +30,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="id">@context.ModuleId</MudTd>
+        <MudTd DataLabel="department">@context.Department</MudTd>
         <MudTd DataLabel="modulename">@context.ModuleName</MudTd>
         <MudTd DataLabel="modulecode">@context.ModuleCode</MudTd>        
         <MudTd DataLabel="lecturehours">@context.semester</MudTd>
@@ -114,8 +116,10 @@
 
     private async Task LoadModules()
     {
-        _modules = (await ViewModuleByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+        var modules = (await ViewModuleByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+        _modules = modules.OrderBy(m => m.Department).ToList();
     }
+
 
     private async Task DeleteModule(NewModule mod)
     {
