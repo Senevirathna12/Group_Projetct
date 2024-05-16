@@ -24,6 +24,6 @@ namespace ERP.Domain.Core.Entity
 
 		public int teacherId { get; set; }
 		
-		public int Department {  get; set; }
+		public string Department {  get; set; }
 	}
 }

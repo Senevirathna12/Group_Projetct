@@ -42,6 +42,7 @@ namespace ERP.Repository.PgSql
                 newModule.ModuleId = editModule.ModuleId;
                 newModule.ModuleCode = editModule.ModuleCode;
                 newModule.ModuleName = editModule.ModuleName;
+                newModule.Department = editModule.Department;
                 newModule.semester = editModule.semester;
                 newModule.Teacher = editModule.Teacher;
                 newModule.Credit = editModule.Credit;
