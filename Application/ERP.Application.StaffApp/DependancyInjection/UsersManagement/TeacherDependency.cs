@@ -17,6 +17,8 @@ namespace ERP.Application.StaffApp.DependancyInjection.UsersManagement
             services.AddScoped<IAddTeacherUseCase, AddTeacherUseCase>();
             services.AddScoped<IViewTeacherByNameUseCase, ViewTeacherByNameUseCase>();
             services.AddScoped<IDeleteTeacherUseCase, DeleteTeacherUseCase>();
+            services.AddScoped<IEditTeacherUseCase, EditTeacherUseCase>();
+            services.AddScoped<IViewTeacherById, ViewTeacherById>();
 
             return services;
         }
