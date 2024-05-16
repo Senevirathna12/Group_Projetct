@@ -39,7 +39,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasKey("BatchId");
 
-                    b.ToTable("Batch");
+                    b.ToTable("Batch", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ComResults", b =>
@@ -100,7 +100,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasKey("ComId");
 
-                    b.ToTable("ComResults");
+                    b.ToTable("ComResults", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Curriculum", b =>
@@ -118,7 +118,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("DegreeId");
 
-                    b.ToTable("Curriculum");
+                    b.ToTable("Curriculum", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Degree", b =>
@@ -140,7 +140,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Degree");
+                    b.ToTable("Degree", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Department", b =>
@@ -153,7 +153,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Department", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Evaluation", b =>
@@ -183,7 +183,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("ModuleOfferingId");
 
-                    b.ToTable("Evaluation");
+                    b.ToTable("Evaluation", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Module", b =>
@@ -219,7 +219,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("CurriculumId");
 
-                    b.ToTable("Modules");
+                    b.ToTable("Modules", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ModuleOffering", b =>
@@ -257,7 +257,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("ModuleOffering");
+                    b.ToTable("ModuleOffering", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ModuleOfferingFirstExaminer", b =>
@@ -277,7 +277,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("TeacherId1");
 
-                    b.ToTable("ModuleFirstExaminers");
+                    b.ToTable("ModuleFirstExaminers", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ModuleOfferingSecondExaminer", b =>
@@ -297,7 +297,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("TeacherId1");
 
-                    b.ToTable("ModuleSecondExaminers");
+                    b.ToTable("ModuleSecondExaminers", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ModuleOfferingTeacher", b =>
@@ -312,7 +312,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("ModuleTeachers");
+                    b.ToTable("ModuleTeachers", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.ModuleRegistration", b =>
@@ -335,7 +335,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("ModuleRegistration");
+                    b.ToTable("ModuleRegistration", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.NewModule", b =>
@@ -367,7 +367,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("teacherId");
 
-                    b.ToTable("Newmodules");
+                    b.ToTable("Newmodules", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Semester", b =>
@@ -400,7 +400,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("SpecializationDegreeId");
 
-                    b.ToTable("Semester");
+                    b.ToTable("Semester", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Student", b =>
@@ -457,7 +457,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
 
                     b.HasData(
                         new
@@ -635,7 +635,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentResult");
+                    b.ToTable("StudentResult", (string)null);
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Teacher", b =>
@@ -695,7 +695,7 @@ namespace ERP.Repository.PgSql.Migrations
 
                     b.HasKey("TeacherId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
 
                     b.HasData(
                         new
