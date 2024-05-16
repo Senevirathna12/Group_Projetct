@@ -5,9 +5,10 @@
 @using ERP.Domain.Core.Entity
 @using FluentValidation
 
+@inject NavigationManager NavigationManager
 @inject IViewTeacherByNameUseCase ViewTeacherByNameUseCase
 @inject IDeleteTeacherUseCase DeleteTeacherUseCase
-
+@inject IDialogService DialogService
 
 
 <div style="text-align: center; margin-bottom: 0;">
@@ -37,10 +38,12 @@
 
 
             <MudTd DataLabel="">
-                <MudFab OnClick="@(()=> {})" Color="Color.Primary"
+                <MudFab OnClick="@(()=> EditTeacher(@context))" Color="Color.Primary"
                         StartIcon="@Icons.Material.Filled.Edit" Size="Size.Small" />
-                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="@(()=> DeleteTeacher(@context))" />
-                <MudFab Color="Color.Success" StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
+                <MudFab Color="Color.Warning" StartIcon="@Icons.Material.Filled.Delete"
+                Size="Size.Small" OnClick="@(()=> DeleteTeacher(@context))" />
+                <MudFab Color="Color.Success" OnClick="@(()=> ViewTeacher(@context))" 
+                    StartIcon="@Icons.Material.Outlined.PermIdentity" Size="Size.Small" />
             </MudTd>
         </RowTemplate>
         <PagerContent>
@@ -115,11 +118,56 @@
 
     private async Task DeleteTeacher(Teacher teacher)
     {
-        // Call the delete use case to delete the teacher
+        
         await DeleteTeacherUseCase.ExecuteAsync(teacher);
 
-        // Reload the teachers list after deletion
+        
         await LoadTeachers();
     }
+
+    async Task EditTeacher(Teacher teacher)
+
+    {
+
+        var parameters = new DialogParameters();
+        parameters.Add(nameof(EditTeacherDialog.teacher), teacher);
+
+
+        var dialog = await DialogService.ShowAsync<EditTeacherDialog>("Save", parameters);
+
+        var result = await dialog.Result;
+
+
+        if (!result.Canceled)
+
+        {
+
+        }
+
+    }
+
+    async Task ViewTeacher(Teacher teacher)
+
+    {
+
+        var parameters = new DialogParameters();
+        parameters.Add(nameof(EditTeacherDialog.teacher), teacher);
+
+
+        var dialog = await DialogService.ShowAsync<ViewTeacherDialog>("Save", parameters);
+
+        var result = await dialog.Result;
+
+
+        if (!result.Canceled)
+
+        {
+
+        }
+
+    }
+
+
+
 
 }

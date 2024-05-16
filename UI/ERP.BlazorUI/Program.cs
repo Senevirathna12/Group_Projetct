@@ -55,6 +55,8 @@ builder.Services.AddScoped<ITeacherRepository, TeacherReporsitoryPgSQL>();
 builder.Services.AddScoped<IAddTeacherUseCase, AddTeacherUseCase>();
 builder.Services.AddScoped<IViewTeacherByNameUseCase, ViewTeacherByNameUseCase>();
 builder.Services.AddScoped<IDeleteTeacherUseCase, DeleteTeacherUseCase>();
+builder.Services.AddScoped<IEditTeacherUseCase,  EditTeacherUseCase>();
+builder.Services.AddScoped<IViewTeacherById,  ViewTeacherById>();
 
 
 var app = builder.Build();

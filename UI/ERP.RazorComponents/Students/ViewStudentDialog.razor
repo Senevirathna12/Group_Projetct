@@ -27,7 +27,7 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        @* <MudButton Color="Color.Error" OnClick="SaveStudent">Save</MudButton> *@
+       
     </DialogActions>
 </MudDialog>
 
@@ -48,17 +48,9 @@
 
 
     private void Cancel()
-
-
-
     {
-
-
 
         MudDialog.Cancel();
-
-
-
     }
 
 
@@ -67,20 +59,20 @@
 
 
 
-    private async void SaveStudent()
+    // private async void SaveStudent()
 
 
 
-    {
-        await EditStudentUseCase.ExecuteAsync(student);
+    // {
+    //     await EditStudentUseCase.ExecuteAsync(student);
 
-        Snackbar.Add("Student Edit Succesfully", Severity.Success);
+    //     Snackbar.Add("Student Edit Succesfully", Severity.Success);
 
-        MudDialog.Close(DialogResult.Ok(student.StudentId));
+    //     MudDialog.Close(DialogResult.Ok(student.StudentId));
 
 
 
-    }
+    // }
 
 
 
