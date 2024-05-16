@@ -20,15 +20,15 @@ namespace ERP.Domain.Core.Entity
         public string NationalID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public ICollection<NewModule> modules { get; set; }
+        //public ICollection<NewModule> modules { get; set; }
 
-        [InverseProperty("Coordinator")]
-        public ICollection<ModuleOffering> CordinatingModules {  get; set; }
+        //[InverseProperty("Coordinator")]
+        //public ICollection<ModuleOffering> CordinatingModules {  get; set; }
 
-        public ICollection<ModuleOfferingTeacher> TeachingModules { get; set; }
+        //public ICollection<ModuleOfferingTeacher> TeachingModules { get; set; }
 
-        public ICollection<ModuleOfferingFirstExaminer> FirstExaminersModules { get; set; }
-        public ICollection<ModuleOfferingSecondExaminer> SecondExaminersModules { get; set; }
+        //public ICollection<ModuleOfferingFirstExaminer> FirstExaminersModules { get; set; }
+        //public ICollection<ModuleOfferingSecondExaminer> SecondExaminersModules { get; set; }
 
 
     }

@@ -11,13 +11,13 @@
         public string Phone { get; set; } = string.Empty;
         public string Address1 { get; set; } = string.Empty;
         public string Address2 { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
+        public string Department { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         //public DateOnly DoB { get; set; }
         public string NationalID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public Degree? Degree { get; set; }
-        public ICollection<Semester> Semesters { get; set; }
+      //  public Degree? Degree { get; set; }
+      //  public ICollection<Semester>? Semesters { get; set; }
     }
 }

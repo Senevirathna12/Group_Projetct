@@ -9,18 +9,18 @@
         <MudTh>RegNB</MudTh>
         <MudTh>Full Name</MudTh>
         <MudTh>Email</MudTh>
-        <MudTh>MobileNB</MudTh>
+        @* <MudTh>MobileNB</MudTh>
         <MudTh>NationalID</MudTh>
-        <MudTh>District</MudTh>
+        <MudTh>District</MudTh> *@
         @* <MudTh>Image</MudTh> *@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="regno">@context.RegistrationNum</MudTd>
         <MudTd DataLabel="fullname">@context.FirstName @context.LastName </MudTd>
         <MudTd DataLabel="email">@context.Email</MudTd>
-        <MudTd DataLabel="mobilenb">@context.PhoneNumber</MudTd>
+        @* <MudTd DataLabel="mobilenb">@context.PhoneNumber</MudTd>
         <MudTd DataLabel="nationalid">@context.NationalID</MudTd>
-        <MudTd DataLabel="district">@context.District</MudTd>
+        <MudTd DataLabel="district">@context.District</MudTd> *@
 
         @* <MudTd DataLabel="image">
             <MudImage Src="images/woman.png" Width="40" />
@@ -55,161 +55,42 @@
 
     private List<Student> _students = new List<Student>();
 
-
-
-
-
-
-
     [Parameter]
-
-
-
-
-
-
 
     public string SearchTerm { get; set; } = string.Empty;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     protected override async Task OnInitializedAsync()
-
-
-
-
-
-
 
     {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         _students = (await ViewStudentsByNameUseCase.ExecuteAsync("")).ToList();
 
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
     protected override async Task OnParametersSetAsync()
 
 
-
-
-
-
-
     {
-
-
-
-
 
 
 
         _students = (await ViewStudentsByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
 
 
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
     void Edit(int studentId)
 
 
-
-
-
-
-
     {
 
-
-
-
-
-
-
         NavigationManager.NavigateTo($"/editstudent/{studentId}");
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

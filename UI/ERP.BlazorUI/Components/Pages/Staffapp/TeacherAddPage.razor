@@ -20,70 +20,86 @@
   
 </style>
 
-<h2><c>ADD A NEW TEACHER</c></h2>
+<h2><c>ADD A NEW LECTURER</c></h2>
 
 <MudCard Class="my-custom-card" >
 
 
-    <h5><c>ADD TEACHERS FROM EXCEL</c></h5>
+    <h5><c>ADD LECTURERS FROM EXCEL</c></h5>
     <InputFile @ref="fileInput" OnChange="HandleFileUpload" />
     @if (teachers != null && teachers.Any())
     {
-        <button class="btn btn-primary" @onclick="SaveAllTeachers">Save All Teachers</button>
+        <button class="btn btn-primary" @onclick="SaveAllTeachers">Save All Lecturers</button>
     }
 
 
 
-    <MudForm Model="@model" @ref="@form">
+    <MudForm Model="@model" @ref="@form" Validation="@(teacherValidator.ValidateValue)" ValidationDelay="0">
         <MudCardContent>
             <MudTextField @bind-Value="model.TeacherId"
                           Immediate="true"
-                          Label="Teacher ID" />
+                          Label="Teacher ID"
+                          For="@(() => model.TeacherId)" />
+
             <MudTextField @bind-Value="model.FirstName"
                           Immediate="true"
-                          Label="First Name" />
+                          Label="First Name"
+                          For="@(() => model.FirstName)" />
 
             <MudTextField @bind-Value="model.LastName"
                           Immediate="true"
-                          Label="Last Name" />
+                          Label="Last Name" 
+                          For="@(() => model.LastName)" />
+
             <MudTextField @bind-Value="model.Department"
                           Immediate="true"
-                          Label="Department" />
+                          Label="Department" 
+                          For="@(() => model.Department)" />
+
             <MudTextField @bind-Value="model.Email"
                           Immediate="true"
-                          Label="Email" />
+                          Label="Email" 
+                          For="@(() => model.Email)" />
+
 
             <MudTextField @bind-Value="model.Phone"
                           Immediate="true"
-                          Label="Phone" />
+                          Label="Phone"
+                          For="@(() => model.Phone)" />
 
             <MudTextField @bind-Value="model.Address1"
                           Immediate="true"
-                          Label="Assress01" />
+                          Label="Assress01"
+                          For="@(() => model.Address1)" />
 
             <MudTextField @bind-Value="model.Address2"
                           Immediate="true"
-                          Label="Address02" />
+                          Label="Address02"
+                          For="@(() => model.Address2)" />
 
             <MudTextField @bind-Value="model.City"
                           Immediate="true"
-                          Label="City" />
+                          Label="City" 
+                          For="@(() => model.City)" />
 
             <MudTextField @bind-Value="model.District"
                           Immediate="true"
-                          Label="District" />
+                          Label="District"
+                          For="@(() => model.District)" />
 
             <MudTextField @bind-Value="model.PhoneNumber"
                           Immediate="true"
-                          Label="Mobile NB" />
+                          Label="Mobile NB" 
+                          For="@(() => model.PhoneNumber)" />
 
             <MudTextField @bind-Value="model.NationalID"
                           Immediate="true"
-                          Label="National ID" />
+                          Label="National ID"
+                          For="@(() => model.NationalID)" />
 
-            <MudTextField @bind-Value="model.modules"
+           @*  <MudTextField @bind-Value="model.modules"
                           Immediate="true"
-                          Label="Modules" />
+                          Label="Modules" /> *@
         </MudCardContent>
     </MudForm>
     <MudCardActions>
@@ -100,7 +116,7 @@
     .my-custom-card {
         max-width: 800px;
         margin: auto;
-        padding: 20px;
+        padding: 50px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #f8f9fa; /* Light gray background */
@@ -113,13 +129,91 @@
 
 
 @code {
-    // start
+   
 
     private string successMessage;
     private string errorMessage;
     private InputFile fileInput;
     private string uploadError;
     private List<Teacher> teachers;
+
+    [Parameter]
+    public EventCallback onAdded { get; set; }
+
+    private Teacher model = new Teacher();
+    private MudForm form;
+
+    TeacherModelValidator teacherValidator = new TeacherModelValidator();
+
+
+   
+
+
+    public class TeacherModelValidator : AbstractValidator<Teacher>
+
+    {
+
+        public TeacherModelValidator()
+
+        {
+
+            RuleFor(x => x.FirstName)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+            RuleFor(x => x.LastName)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+            RuleFor(x => x.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .EmailAddress()
+            .MustAsync(async (value, cancellationToken) => await IsUniqueAsync(value));
+
+
+            RuleFor(x => x.Address1)
+            .NotEmpty()
+            .Length(1, 100);
+
+
+        }
+
+
+        private async Task<bool> IsUniqueAsync(string email)
+
+        {
+
+            await Task.Delay(2000);
+            return email.ToLower() != "test@test.com";
+
+
+        }
+
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+
+            var result = await ValidateAsync(ValidationContext<Teacher>
+
+            .CreateWithOptions((Teacher)model, x => x.IncludeProperties(propertyName)));
+
+            if (result.IsValid)
+
+
+                return Array.Empty<string>();
+
+
+            return result.Errors.Select(e => e.ErrorMessage);
+
+
+
+        };
+
+
+    }
 
     private async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
@@ -218,36 +312,46 @@
         }
     }
 
-    private ICollection<NewModule> ParseModules(string modulesData)
-    {
-        if (string.IsNullOrEmpty(modulesData))
-            return new List<NewModule>();
+    // private ICollection<NewModule> ParseModules(string modulesData)
+    // {
+    //     if (string.IsNullOrEmpty(modulesData))
+    //         return new List<NewModule>();
 
-        // Assuming modules are separated by comma
-        var modulesArray = modulesData.Split(',');
+    //     // Assuming modules are separated by comma
+    //     var modulesArray = modulesData.Split(',');
 
-        var modules = new List<NewModule>();
+    //     var modules = new List<NewModule>();
 
-        foreach (var module in modulesArray)
-        {
-            // Create a new instance of NewModule for each module
-            modules.Add(new NewModule { ModuleName = module.Trim() });
-        }
+    //     foreach (var module in modulesArray)
+    //     {
+    //         // Create a new instance of NewModule for each module
+    //         modules.Add(new NewModule { ModuleName = module.Trim() });
+    //     }
 
-        return modules;
-    }
+    //     return modules;
+    // }
 
 
 
     // over
 
-    private Teacher model = new Teacher();
-    private MudForm form;
+  
    
 
     private async Task Submit()
     {
-        await AddTeacherUseCase.ExecuteAsync(model);
+        
+
+        await form.Validate();
+        if (form.IsValid)
+
+        {
+            await AddTeacherUseCase.ExecuteAsync(model);
+            await onAdded.InvokeAsync();
+            Snackbar.Add("New Lecturer added successfully", MudBlazor.Severity.Success);
+
+
+        }
      
     }
 }
