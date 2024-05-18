@@ -1,5 +1,5 @@
 ﻿using ERP.Domain.Core.Entity;
-using ERP.Repository.PgSql.Configurations;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Repository.PgSql
@@ -14,8 +14,8 @@ namespace ERP.Repository.PgSql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new StudentConfigurations());
-            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            //modelBuilder.ApplyConfiguration(new StudentConfigurations());
+            //modelBuilder.ApplyConfiguration(new TeacherConfiguration());
             
             modelBuilder.Entity<ModuleOfferingTeacher>()
             .HasKey(mt => new { mt.ModuleOfferingId, mt.TeacherId });
@@ -64,6 +64,9 @@ namespace ERP.Repository.PgSql
             modelBuilder.Entity<NewModule>()
                 .HasKey(mf => new { mf.ModuleId });
 
+            modelBuilder.Entity<ComResults>()
+               .HasKey(mf => new { mf.ComId });
+
             // module registration foreign key
 
             //modelBuilder.Entity<NewModule>()
@@ -80,6 +83,8 @@ namespace ERP.Repository.PgSql
         public DbSet<Student> Students { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<ComResults> ComResults { get; set; }
         public DbSet<ModuleOfferingTeacher> ModuleTeachers { get; set;}
         public DbSet<ModuleOfferingFirstExaminer> ModuleFirstExaminers { get; set; }
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }

@@ -1,8 +1,11 @@
 using ERP.Application.StaffApp.Interfaces;
+using ERP.Application.StaffApp.Interfaces.ResultsMnagement;
 using ERP.Application.StaffApp.Interfaces.UsersManagement;
 using ERP.Application.StaffApp.ReporsitoryInterface;
+using ERP.Application.StaffApp.ReporsitoryInterface.ResultsMangement;
 using ERP.Application.StaffApp.ReporsitoryInterface.UsersManagement;
 using ERP.Application.StaffApp.UseCases;
+using ERP.Application.StaffApp.UseCases.ResultMnagement;
 using ERP.Application.StaffApp.UseCases.UsersManagement;
 using ERP.Application.StudentApp.Interfaces;
 using ERP.Application.StudentApp.Students;
@@ -57,6 +60,10 @@ builder.Services.AddScoped<IViewTeacherByNameUseCase, ViewTeacherByNameUseCase>(
 builder.Services.AddScoped<IDeleteTeacherUseCase, DeleteTeacherUseCase>();
 builder.Services.AddScoped<IEditTeacherUseCase,  EditTeacherUseCase>();
 builder.Services.AddScoped<IViewTeacherById,  ViewTeacherById>();
+
+builder.Services.AddScoped<IComResultsRepository, ComResultsRepositoryPgSQL>();
+builder.Services.AddScoped<IAddComResultsUseCase, AddComResultsUseCase>();
+builder.Services.AddScoped<IViewComResultsByNameUseCase, ViewComResultsByNameUseCase>();
 
 
 var app = builder.Build();
