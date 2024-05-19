@@ -3,6 +3,7 @@ using System;
 using ERP.Repository.PgSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ERP.Repository.PgSql.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    partial class PgSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519050513_Resource")]
+    partial class Resource
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,67 +43,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasKey("BatchId");
 
                     b.ToTable("Batch");
-                });
-
-            modelBuilder.Entity("ERP.Domain.Core.Entity.ComResults", b =>
-                {
-                    b.Property<int>("ComId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ComId"));
-
-                    b.Property<string>("CE0001")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0002")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0003")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0004")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0005")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0006")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0007")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0008")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0009")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0010")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0011")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CE0012")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Department")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Semester")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("StudentName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ComId");
-
-                    b.ToTable("ComResults");
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Curriculum", b =>
@@ -558,7 +500,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasKey("StudentId");
 
                     b.ToTable("Students");
- DevM
 
                     b.HasData(
                         new
@@ -711,8 +652,6 @@ namespace ERP.Repository.PgSql.Migrations
                             PhoneNumber = "",
                             RegistrationNum = "EG/2022/3554"
                         });
-
- main
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.StudentResult", b =>
@@ -799,7 +738,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasKey("TeacherId");
 
                     b.ToTable("Teachers");
- DevM
 
                     b.HasData(
                         new
@@ -962,8 +900,6 @@ namespace ERP.Repository.PgSql.Migrations
                             Phone = "",
                             PhoneNumber = ""
                         });
-
- main
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Curriculum", b =>

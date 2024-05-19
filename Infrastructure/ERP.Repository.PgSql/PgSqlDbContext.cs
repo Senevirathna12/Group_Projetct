@@ -14,9 +14,16 @@ namespace ERP.Repository.PgSql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+ DevM
+            modelBuilder.ApplyConfiguration(new StudentConfigurations());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+
+
             //modelBuilder.ApplyConfiguration(new StudentConfigurations());
             //modelBuilder.ApplyConfiguration(new TeacherConfiguration());
             
+ main
             modelBuilder.Entity<ModuleOfferingTeacher>()
             .HasKey(mt => new { mt.ModuleOfferingId, mt.TeacherId });
 
@@ -73,6 +80,8 @@ namespace ERP.Repository.PgSql
             //    .HasOne(ms => ms.Teacher)
             //    .WithMany(ms => ms.modules)
             //    .HasForeignKey(ms => ms.teacherId);
+            modelBuilder.Entity<Resource>()
+               .HasKey(rf => new { rf.ResourceId });
 
 
 
@@ -90,6 +99,8 @@ namespace ERP.Repository.PgSql
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }
 
         public DbSet<NewModule> Newmodules { get; set; }
+
+        public DbSet<Resource> Resources { get; set; }
         
 
     }
