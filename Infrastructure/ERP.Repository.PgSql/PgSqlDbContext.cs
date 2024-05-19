@@ -74,7 +74,8 @@ namespace ERP.Repository.PgSql
             //    .WithMany(ms => ms.modules)
             //    .HasForeignKey(ms => ms.teacherId);
 
-
+            modelBuilder.Entity<Resource>()
+                .HasKey(mf => new {mf.ResourceId});
 
 
 
@@ -90,6 +91,8 @@ namespace ERP.Repository.PgSql
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }
 
         public DbSet<NewModule> Newmodules { get; set; }
+
+        public DbSet<Resource> Resources { get; set; }
         
 
     }

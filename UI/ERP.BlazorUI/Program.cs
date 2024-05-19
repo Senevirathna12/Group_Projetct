@@ -1,10 +1,12 @@
 using ERP.Application.StaffApp.Interfaces;
+using ERP.Application.StaffApp.Interfaces.ResourceManagement;
 using ERP.Application.StaffApp.Interfaces.ResultsMnagement;
 using ERP.Application.StaffApp.Interfaces.UsersManagement;
 using ERP.Application.StaffApp.ReporsitoryInterface;
 using ERP.Application.StaffApp.ReporsitoryInterface.ResultsMangement;
 using ERP.Application.StaffApp.ReporsitoryInterface.UsersManagement;
 using ERP.Application.StaffApp.UseCases;
+using ERP.Application.StaffApp.UseCases.ResourceManagement;
 using ERP.Application.StaffApp.UseCases.ResultMnagement;
 using ERP.Application.StaffApp.UseCases.UsersManagement;
 using ERP.Application.StudentApp.Interfaces;
@@ -64,6 +66,12 @@ builder.Services.AddScoped<IViewTeacherById,  ViewTeacherById>();
 builder.Services.AddScoped<IComResultsRepository, ComResultsRepositoryPgSQL>();
 builder.Services.AddScoped<IAddComResultsUseCase, AddComResultsUseCase>();
 builder.Services.AddScoped<IViewComResultsByNameUseCase, ViewComResultsByNameUseCase>();
+
+builder.Services.AddScoped<IResourceRepository, ResourceRepositoryPgSQL>();
+builder.Services.AddScoped<IAddResourceUseCase, AddResourceUseCase>();
+builder.Services.AddScoped<IDeleteResourceUseCase, DeleteResourceUseCase>();
+builder.Services.AddScoped<IEditResourceUseCase, EditResourceUseCase>();
+builder.Services.AddScoped<IViewResourceByNameUseCase, ViewResourceByNameUseCase>();
 
 
 var app = builder.Build();
