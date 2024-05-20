@@ -3,6 +3,7 @@ using System;
 using ERP.Repository.PgSql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ERP.Repository.PgSql.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    partial class PgSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519104133_ljbljblklbdytdytd")]
+    partial class ljbljblklbdytdytd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,6 +89,14 @@ namespace ERP.Repository.PgSql.Migrations
                     b.Property<string>("CE0012")
                         .HasColumnType("text");
 
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Semester")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -133,59 +144,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Degree");
-                });
-
-            modelBuilder.Entity("ERP.Domain.Core.Entity.DeieResults", b =>
-                {
-                    b.Property<int>("DEIEid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DEIEid"));
-
-                    b.Property<string>("EE0001")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0002")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0003")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0004")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0005")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0006")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0007")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0008")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0009")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0010")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0011")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EE0012")
-                        .HasColumnType("text");
-
-                    b.Property<string>("StudentName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("DEIEid");
-
-                    b.ToTable("Deieresults");
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Department", b =>
@@ -417,30 +375,6 @@ namespace ERP.Repository.PgSql.Migrations
                     b.HasIndex("teacherId");
 
                     b.ToTable("Newmodules");
-                });
-
-            modelBuilder.Entity("ERP.Domain.Core.Entity.Resource", b =>
-                {
-                    b.Property<int>("ResourceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ResourceId"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ResourceId");
-
-                    b.ToTable("Resources");
                 });
 
             modelBuilder.Entity("ERP.Domain.Core.Entity.Semester", b =>

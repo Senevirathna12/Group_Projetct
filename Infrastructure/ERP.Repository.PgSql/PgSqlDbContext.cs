@@ -66,6 +66,9 @@ namespace ERP.Repository.PgSql
 
             modelBuilder.Entity<ComResults>()
                .HasKey(mf => new { mf.ComId });
+        
+            modelBuilder.Entity<DeieResults>()
+                .HasKey(mf => new { mf.DEIEid });            
 
             // module registration foreign key
 
@@ -86,6 +89,7 @@ namespace ERP.Repository.PgSql
         public DbSet<Teacher> Teachers { get; set; }
 
         public DbSet<ComResults> ComResults { get; set; }
+        public DbSet<DeieResults> Deieresults { get; set; }
         public DbSet<ModuleOfferingTeacher> ModuleTeachers { get; set;}
         public DbSet<ModuleOfferingFirstExaminer> ModuleFirstExaminers { get; set; }
         public DbSet<ModuleOfferingSecondExaminer> ModuleSecondExaminers { get; set; }
