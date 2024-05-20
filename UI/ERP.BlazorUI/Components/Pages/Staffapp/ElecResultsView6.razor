@@ -1,0 +1,113 @@
+@page "/ElecResultsList6"
+
+
+@using ERP.Application.StaffApp.Interfaces.ResultsMnagement
+@using ERP.Domain.Core.Entity
+@using FluentValidation
+
+@inject NavigationManager NavigationManager
+@inject IViewElecResultsByNameUseCase ViewElecResultsByNameUseCase
+
+@inject IDialogService DialogService
+
+
+<div style="text-align: center; margin-bottom: 0;">
+    <h2><u>DEIE SEMESTER 6 RESULTS LIST</u></h2>
+</div>
+
+
+<MudTable Items="@_elecresults" Class="custom-table">
+    <HeaderContent>
+        <MudTh >ID</MudTh>
+        <MudTh>Full Name</MudTh>
+        <MudTh>EE0001</MudTh>
+        <MudTh>EE0002</MudTh>
+        <MudTh>EE0003</MudTh>
+        <MudTh>EE0004</MudTh>
+      
+
+    </HeaderContent>
+    <RowTemplate>
+            <MudTd DataLabel="id">@context.DEIEid</MudTd>
+            <MudTd DataLabel="fullname">@context.StudentName</MudTd>
+            <MudTd DataLabel="ee0001">@context.EE0001</MudTd>
+            <MudTd DataLabel="ee0002">@context.EE0002</MudTd>     
+            <MudTd DataLabel="ee0003">@context.EE0003</MudTd>
+            <MudTd DataLabel="ee0004">@context.EE0004</MudTd>
+
+
+
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+    <style>
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .custom-table th, .custom-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            .custom-table th {
+                background-color: #f6efef;
+                color: #000000;
+                font-size: large;
+                font-weight: 600;
+                font-family: sans-serif;
+            }
+
+            .custom-table td {
+                background-color: #54a3c2;
+                color: #000000;
+            }
+    </style>
+
+
+@code {
+    private List<DeieResults> _elecresults = new List<DeieResults>();
+
+    [Parameter]
+
+    public string SearchTerm { get; set; } = string.Empty;
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync("")).ToList();
+
+    // }
+
+    // protected override async Task OnParametersSetAsync()
+    // {
+    //     _teachers = (await ViewTeacherByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+
+    // }
+
+    
+
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadElecResults();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadElecResults();
+    }
+
+    private async Task LoadElecResults()
+    {
+        _elecresults = (await ViewElecResultsByNameUseCase.ExecuteAsync(SearchTerm)).ToList();
+    }
+
+
+
+}

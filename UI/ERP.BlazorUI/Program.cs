@@ -62,8 +62,11 @@ builder.Services.AddScoped<IEditTeacherUseCase,  EditTeacherUseCase>();
 builder.Services.AddScoped<IViewTeacherById,  ViewTeacherById>();
 
 builder.Services.AddScoped<IComResultsRepository, ComResultsRepositoryPgSQL>();
+builder.Services.AddScoped<IElecResultsRepository, ElecResultsRepositoryPgSQL>();
 builder.Services.AddScoped<IAddComResultsUseCase, AddComResultsUseCase>();
 builder.Services.AddScoped<IViewComResultsByNameUseCase, ViewComResultsByNameUseCase>();
+builder.Services.AddScoped<IAddElecResultsUseCase, AddElecResultsUseCase>();
+builder.Services.AddScoped<IViewElecResultsByNameUseCase, ViewElecResultsByNameUseCase>();
 
 
 var app = builder.Build();
