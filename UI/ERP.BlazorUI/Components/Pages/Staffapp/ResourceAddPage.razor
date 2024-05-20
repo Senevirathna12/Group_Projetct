@@ -1,0 +1,105 @@
+﻿@page "/resourceAddPage"
+@using ERP.Application.StaffApp.Interfaces.ResourceManagement
+@using ERP.Domain.Core.Entity
+@using FluentValidation
+@using MudBlazor
+
+@inject IAddResourceUseCase AddResourceUseCase
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+<style>
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<h2>ADD A NEW RESOURCE</h2>
+
+<MudCard Class="my-custom-card">
+    <MudForm Model="@model" @ref="@form" Validation="@(resourceValidator.ValidateValue)" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.ResourceId"
+                          Immediate="true"
+                          Label="Resource ID" />
+            <MudTextField @bind-Value="model.Name"
+                          For="@(() => model.Name)"
+                          Immediate="true"
+                          Label="Name" />
+            <MudTextField @bind-Value="model.Type"
+                          For="@(() => model.Type)"
+                          Immediate="true"
+                          Label="Resource Type" />
+            <MudTextField @bind-Value="model.Description"
+                          For="@(() => model.Description)"
+                          Immediate="true"
+                          Label="Description" />
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="ml-auto"
+                   OnClick="@(async () => await Submit())">Add</MudButton>
+    </MudCardActions>
+</MudCard>
+
+<style>
+    .my-custom-card {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ced4da; /* Gray border */
+    }
+</style>
+
+@code {
+    private Resource model = new Resource();
+    private ResourceModelValidator resourceValidator = new ResourceModelValidator();
+    private MudForm form;
+
+    private async Task Submit()
+    {
+        await form.Validate();
+
+        if (form.IsValid)
+        {
+            try
+            {
+                await AddResourceUseCase.ExecuteAsync(model);
+                Snackbar.Add("Resource added successfully", MudBlazor.Severity.Success);
+                NavigationManager.NavigateTo("/resourceList");
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add($"Error: {ex.Message}", MudBlazor.Severity.Error);
+            }
+        }
+    }
+
+    public class ResourceModelValidator : AbstractValidator<Resource>
+    {
+        public ResourceModelValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().Length(1, 100);
+            
+            RuleFor(x => x.Description).NotEmpty().Length(1, 250);
+        }
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+            var result = await ValidateAsync(ValidationContext<Resource>
+                .CreateWithOptions((Resource)model, x => x.IncludeProperties(propertyName)));
+
+            if (result.IsValid)
+                return Array.Empty<string>();
+
+            return result.Errors.Select(e => e.ErrorMessage);
+        };
+    }
+}

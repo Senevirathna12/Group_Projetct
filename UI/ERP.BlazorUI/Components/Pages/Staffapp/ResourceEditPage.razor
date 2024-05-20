@@ -1,0 +1,75 @@
+﻿@page "/ResourceEditPage/{ResourceName}"
+
+@using ERP.Domain.Core.Entity
+@using ERP.Application.StaffApp.Interfaces.ResourceManagement
+@using FluentValidation
+
+@inject ISnackbar Snackbar
+@inject IEditResourceUseCase EditResourceUseCase
+@inject IViewResourceByNameUseCase ViewResourceByNameUseCase
+
+<h3>Edit Resource</h3>
+
+<MudCard>
+    <MudForm Model="@model" @ref="@form" Validation="@(resourceValidator.ValidateValue)" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.Name" For="@(() => model.Name)" Immediate="true" Label="Resource Name" ReadOnly="true" />
+            <MudTextField @bind-Value="model.Type" For="@(() => model.Type)" Immediate="true" Label="Resource Type" />
+            <MudTextField @bind-Value="model.Description" For="@(() => model.Description)" Immediate="true" Label="Description" />
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit())">Save</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    private Resource model;
+
+    [Parameter]
+    public string ResourceName { get; set; }
+
+    ResourceModelValidator resourceValidator = new ResourceModelValidator();
+    MudForm form;
+
+    public class ResourceModelValidator : AbstractValidator<Resource>
+    {
+        public ResourceModelValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().Length(1, 100);
+            
+            RuleFor(x => x.Description).NotEmpty().Length(1, 250);
+        }
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+            var result = await ValidateAsync(ValidationContext<Resource>
+                .CreateWithOptions((Resource)model, x => x.IncludeProperties(propertyName)));
+
+            if (result.IsValid)
+                return Array.Empty<string>();
+
+            return result.Errors.Select(e => e.ErrorMessage);
+        };
+    }
+
+    private async Task Submit()
+    {
+        await form.Validate();
+
+        if (form.IsValid)
+        {
+            await EditResourceUseCase.ExecuteAsync(model);
+            Snackbar.Add("Resource edited successfully", MudBlazor.Severity.Success);
+        }
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var resources = await ViewResourceByNameUseCase.ExecuteAsync(ResourceName);
+        model = resources.FirstOrDefault(); // Assuming you want to work with the first resource if multiple are returned
+    }
+}
+}

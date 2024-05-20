@@ -286,9 +286,15 @@
             </MudNavGroup>          
 
 
-            <MudNavLink Href="/counter" Icon="@Icons.Material.Filled.Security" IconColor="Color.Inherit">Resources
-                Management
-            </MudNavLink>
+            <MudNavGroup Class="text" Title="Resource Management" Icon="@Icons.Material.Filled.Laptop"
+                         IconColor="Color.Inherit" Expanded="false">
+                <MudNavLink Href="/resourceAddPage" Icon="@Icons.Material.Filled.People" IconColor="Color.Inherit">
+                    Add Resource
+                </MudNavLink>
+                <MudNavLink Href="/resourceList" Icon="@Icons.Material.Filled.People" IconColor="Color.Inherit">
+                    Resource List
+                </MudNavLink>
+            </MudNavGroup>
         </MudNavGroup>
     </MudNavMenu>
 </MudPaper>
