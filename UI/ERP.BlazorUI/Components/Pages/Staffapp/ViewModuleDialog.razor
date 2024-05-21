@@ -1,7 +1,8 @@
-@using ERP.Application.StaffApp.Interfaces
-@using ERP.Application.StaffApp.ReporsitoryInterface
+﻿@using ERP.Application.StaffApp.Interfaces
 @using ERP.Domain.Core.Entity
 @using Microsoft.AspNetCore.Components.Web
+
+
 
 @inject ISnackbar Snackbar
 @inject IViewModuleByNameUseCase ViewModuleByNameUseCase
@@ -12,8 +13,8 @@
 <MudDialog Class="my-custom-dialog">
     <TitleContent>
         <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
-            Edit Module
+            <MudIcon Icon="@Icons.Material.Filled.PermIdentity" Class="mr-3 mb-n1" />
+            View Module
         </MudText>
     </TitleContent>
     <DialogContent>
@@ -27,9 +28,13 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Error" OnClick="SaveModule">Save</MudButton>
+
     </DialogActions>
 </MudDialog>
+
+
+
+
 
 <style>
     .my-custom-dialog {
@@ -41,6 +46,7 @@
 </style>
 
 @code {
+
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
     [Parameter] public ERP.Domain.Core.Entity.NewModule module { get; set; } = new();
@@ -48,40 +54,9 @@
 
 
     private void Cancel()
-
     {
 
         MudDialog.Cancel();
-
     }
 
-    private async void SaveModule()
-
-
-
-    {
-        await EditModuleUseCase.ExecuteAsync(module);
-
-        Snackbar.Add("Module Edit Succesfully", Severity.Success);
-
-        MudDialog.Close(DialogResult.Ok(module.ModuleId));
-
-
-
-    }
-
-
-
-
-
-
-
-   
-
-
-
-
-
-    
 }
-

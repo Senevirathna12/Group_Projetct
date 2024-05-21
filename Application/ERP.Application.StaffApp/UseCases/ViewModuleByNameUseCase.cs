@@ -21,9 +21,9 @@ namespace ERP.Application.StaffApp.UseCases
 
         public async Task<IEnumerable<NewModule>>
             
-            ExecuteAsync(string na = "")
+            ExecuteAsync(string name = "")
         {
-            return await moduleRepository.GetAllModulesAsync(na);
+            return await moduleRepository.GetAllModulesAsync(name);
         }
 
     }
