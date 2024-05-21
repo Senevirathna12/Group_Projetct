@@ -19,17 +19,17 @@ namespace ERP.Repository.PgSql
             _factory = factory;
             
         }
-        public Task AddModuleAsync(NewModule newModule)
+        public Task AddModuleAsync(NewModule newmodule)
         {
             using var _context = _factory.CreateDbContext();
-            _context.Newmodules.Add(newModule);
+            _context.Newmodules.Add(newmodule);
             _context.SaveChanges();
             return Task.CompletedTask;
         }
-        public async Task DeleteModuleAsync(NewModule mod)
+        public async Task DeleteModuleAsync(NewModule newmodule)
         {
             using var _context = _factory.CreateDbContext();
-            _context.Newmodules.Remove(mod);
+            _context.Newmodules.Remove(newmodule);
             await _context.SaveChangesAsync();
         }
         public Task EditModuleAsync(NewModule editModule)
@@ -57,7 +57,7 @@ namespace ERP.Repository.PgSql
             using var _context = _factory.CreateDbContext();
             return await _context.Newmodules.ToListAsync();
         }
-        public async Task<NewModule> GetModulesById(int moduleId)
+        public async Task<NewModule> GetModuleById(int moduleId)
         {
             using var _context = _factory.CreateDbContext();
             return await _context.Newmodules.FirstOrDefaultAsync(x => x.ModuleId == moduleId);

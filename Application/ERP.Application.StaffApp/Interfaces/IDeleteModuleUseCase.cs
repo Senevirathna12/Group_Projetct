@@ -7,7 +7,7 @@ namespace ERP.Application.StaffApp.Interfaces
 {
     public interface IDeleteModuleUseCase
     {
-        Task ExecuteAsync(NewModule mod);
+        Task ExecuteAsync(NewModule newmodule);
 
     }
 }

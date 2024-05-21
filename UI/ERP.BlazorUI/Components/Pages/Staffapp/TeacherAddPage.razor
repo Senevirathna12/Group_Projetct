@@ -243,7 +243,7 @@
             await file.OpenReadStream().CopyToAsync(memoryStream);
             memoryStream.Position = 0;
 
-            // Load the Excel package using EPPlus
+            
             using (var package = new OfficeOpenXml.ExcelPackage(memoryStream))
             {
                 var worksheet = package.Workbook.Worksheets.FirstOrDefault();
@@ -308,32 +308,11 @@
             }
 
 
-            StateHasChanged(); // Update the UI
+            StateHasChanged();
         }
     }
 
-    // private ICollection<NewModule> ParseModules(string modulesData)
-    // {
-    //     if (string.IsNullOrEmpty(modulesData))
-    //         return new List<NewModule>();
-
-    //     // Assuming modules are separated by comma
-    //     var modulesArray = modulesData.Split(',');
-
-    //     var modules = new List<NewModule>();
-
-    //     foreach (var module in modulesArray)
-    //     {
-    //         // Create a new instance of NewModule for each module
-    //         modules.Add(new NewModule { ModuleName = module.Trim() });
-    //     }
-
-    //     return modules;
-    // }
-
-
-
-    // over
+ 
 
   
    

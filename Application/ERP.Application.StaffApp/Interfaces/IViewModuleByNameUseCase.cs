@@ -10,7 +10,7 @@ namespace ERP.Application.StaffApp.Interfaces
 {
     public interface IViewModuleByNameUseCase
     {
-        Task<IEnumerable<NewModule>> ExecuteAsync(string na = "");
+        Task<IEnumerable<NewModule>> ExecuteAsync(string name = "");
 
     }
 }

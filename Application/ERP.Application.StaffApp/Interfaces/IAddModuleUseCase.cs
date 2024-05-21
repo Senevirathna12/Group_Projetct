@@ -10,6 +10,6 @@ namespace ERP.Application.StaffApp.Interfaces
 {
 	public interface IAddModuleUseCase
 	{
-		Task ExecuteAsync(NewModule newModule);
+		Task ExecuteAsync(NewModule newmodule);
 	}
 }

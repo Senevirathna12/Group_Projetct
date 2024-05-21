@@ -11,16 +11,16 @@ namespace ERP.Application.StaffApp.UseCases
 {
     public class EditModuleUseCase : IEditModuleUseCase
     {
-        private readonly IModuleRepository _moduleRepository;
+        private readonly IModuleRepository moduleRepository;
 
         public EditModuleUseCase(IModuleRepository moduleRepository)
         {
-            _moduleRepository = moduleRepository;
+            this.moduleRepository = moduleRepository;
 
         }
-        public async Task ExecuteAsync(NewModule editModule)
+        public async Task ExecuteAsync(NewModule mod)
         {
-            await _moduleRepository.EditModuleAsync(editModule);
+            await moduleRepository.EditModuleAsync(mod);
         }
     }
 }

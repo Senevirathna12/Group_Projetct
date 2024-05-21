@@ -18,9 +18,9 @@ namespace ERP.Application.StaffApp.UseCases
             _moduleRepository = moduleRepository;
 
         }
-        public async Task ExecuteAsync(NewModule newModule)
+        public async Task ExecuteAsync(NewModule newwModule)
         {
-            await _moduleRepository.AddModuleAsync(newModule);
+            await _moduleRepository.AddModuleAsync(newwModule);
         }
     }
 }

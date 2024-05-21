@@ -9,10 +9,10 @@ namespace ERP.Application.StaffApp.ReporsitoryInterface
 {
     public interface IModuleRepository
     {
-        Task AddModuleAsync(NewModule newModule);
-        Task EditModuleAsync(NewModule editModule);
-        Task DeleteModuleAsync(NewModule deleteModule);
-        Task<NewModule> GetModulesById(int moduleId);
+        Task AddModuleAsync(NewModule newmodule);
+        Task EditModuleAsync(NewModule newmodule);
+        Task DeleteModuleAsync(NewModule newmodule);
+        Task<NewModule> GetModuleById(int newmoduleId);
 		
         Task<IEnumerable<NewModule>> GetAllModulesAsync(string name);
     }

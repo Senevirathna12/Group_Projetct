@@ -23,7 +23,7 @@ namespace ERP.Application.StaffApp.UseCases
         public async Task<NewModule>
             ExecuteAsync(int moduleId)
         {
-            return await moduleRepository.GetModulesById(moduleId);
+            return await moduleRepository.GetModuleById(moduleId);
         }
 
 
